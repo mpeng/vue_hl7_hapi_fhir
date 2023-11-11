@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <card>
         <template slot="header">
-          <h4 class="card-title">Paper Dashboard Headings</h4>
+          <h4 class="card-title">Vue Health Headings</h4>
           <p class="card-category">
             Created using
             <a href="https://www.google.com/fonts/specimen/Muli">Muli</a> Font

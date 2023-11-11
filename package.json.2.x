@@ -1,5 +1,5 @@
 {
-  "name": "vue-paper-dashboard",
+  "name": "vue-health-institute",
   "version": "1.0.1",
   "private": true,
   "scripts": {
@@ -29,8 +29,8 @@
     "sass-loader": "10.2.0",
     "vue-template-compiler": "2.7.14"
   },
-  "description": "A sample admin dashboard based on paper dashboard UI template",
-  "author": "cristian.jora <joracristi@gmail.com>",
+  "description": "A demo that shows how Vue is used to display health and medical related information",
+  "author": "Michael Peng <michael.peng@theoptionslab.com>",
   "engines": {
     "node": ">= 8.1.4",
     "npm": ">= 5.0.0"

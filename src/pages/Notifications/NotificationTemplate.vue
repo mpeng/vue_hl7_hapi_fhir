@@ -1,7 +1,6 @@
 <template>
   <span
-    >Welcome to <b>Paper Dashboard</b> - a beautiful freebie for every web
-    developer.</span
+    >Welcome to <b>Vue Health Institute</b></span
   >
 </template>
 
