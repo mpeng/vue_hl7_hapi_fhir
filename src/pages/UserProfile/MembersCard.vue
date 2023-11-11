@@ -45,7 +45,7 @@ export default {
         },
         {
           image: require("@/assets/img/faces/face-1.jpg"),
-          name: "Creative Tim",
+          name: "Michael Peng",
           status: "Available",
         },
         {
