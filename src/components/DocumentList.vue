@@ -5,7 +5,7 @@
         <input type="text" class="form-control" placeholder="Search by title"
           v-model="title"/>
         <div class="input-group-append">
-          <button class="btn-outline-secondary" type="button"
+          <button class="btn btn-icon" type="button"
             @click="searchTitle"
           >
             Search
@@ -15,6 +15,7 @@
     </div>
     <div class="col-md-6">
       <h4>Documents List</h4>
+
       <ul class="list-group">
         <li class="list-group-item"
           :class="{ active: index == currentIndex }"
@@ -45,10 +46,7 @@
 
         <router-link :to="'/documents/' + currentDocument.id" class="btn btn-info">Edit</router-link>
       </div>
-      <div v-else>
-        <br />
-        <p>Please click on a Document</p>
-      </div>
+
     </div>
   </div>
 </template>
@@ -132,6 +130,10 @@ export default {
   margin-bottom: 300px;
   border: 5px none;
   text-align: left;
+}
+
+.input-group {
+  width: 60%;
 }
 
 </style>

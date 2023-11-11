@@ -83,4 +83,9 @@ export default {
   margin-top: 100px;
   margin-bottom: 300px;
 }
+
+.form-group {
+  width: 50%;
+}
+
 </style>

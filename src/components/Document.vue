@@ -47,10 +47,7 @@
     <p>{{ message }}</p>
   </div>
 
-  <div v-else>
-    <br />
-    <p>Please click on a Document</p>
-  </div>
+
 </template>
 
 <script>
@@ -110,7 +107,8 @@ export default {
       DataService.delete(this.currentDocument.id)
         .then(response => {
           console.log(response.data);
-          this.$router.push({ name: "documents" });
+          this.message = 'The document was deleted successfully!';
+          this.$router.push({ path: "/documents" });
         })
         .catch(e => {
           console.log(e);
