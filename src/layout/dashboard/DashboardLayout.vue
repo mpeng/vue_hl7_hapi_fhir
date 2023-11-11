@@ -15,19 +15,19 @@
         <sidebar-link
           to="/organizations-list"
           name="Organizations"
-          icon="ti-map"
+          icon="ti-layout-grid4"
         />
 
         <sidebar-link
           to="/tutorials"
           name="Browse documents"
-          icon="ti-user"
+          icon="ti-files"
         />
 
         <sidebar-link
           to="/add"
           name="Add a document"
-          icon="ti-map"
+          icon="ti-upload"
         />
         <!--
         <sidebar-link to="/typography" name="Typography" icon="ti-text" />
