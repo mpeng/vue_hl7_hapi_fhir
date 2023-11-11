@@ -18,32 +18,32 @@
       <ul class="list-group">
         <li class="list-group-item"
           :class="{ active: index == currentIndex }"
-          v-for="(tutorial, index) in tutorials"
+          v-for="(document, index) in documents"
           :key="index"
-          @click="setActiveTutorial(tutorial, index)"
+          @click="setActiveDocument(document, index)"
         >
-          {{ tutorial.title }}
+          {{ document.title }}
         </li>
       </ul>
 
-      <button class="m-3 btn btn-sm btn-danger" @click="removeAllTutorials">
+      <button class="m-3 btn btn-sm btn-danger" @click="removeAllDocuments">
         Remove All
       </button>
     </div>
     <div class="col-md-6">
-      <div v-if="currentTutorial">
+      <div v-if="currentDocument">
         <h4>Document</h4>
         <div>
-          <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+          <label><strong>Title:</strong></label> {{ currentDocument.title }}
         </div>
         <div>
-          <label><strong>Description:</strong></label> {{ currentTutorial.description }}
+          <label><strong>Description:</strong></label> {{ currentDocument.description }}
         </div>
         <div>
-          <label><strong>Status:</strong></label> {{ currentTutorial.published ? "Published" : "Pending" }}
+          <label><strong>Status:</strong></label> {{ currentDocument.published ? "Published" : "Pending" }}
         </div>
 
-        <router-link :to="'/tutorials/' + currentTutorial.id" class="btn btn-info">Edit</router-link>
+        <router-link :to="'/documents/' + currentDocument.id" class="btn btn-info">Edit</router-link>
       </div>
       <div v-else>
         <br />
@@ -57,20 +57,20 @@
 import DataService from "../services/DataService";
 
 export default {
-  name: "tutorials-list",
+  name: "documents-list",
   data() {
     return {
-      tutorials: [],
-      currentTutorial: null,
+      documents: [],
+      currentDocument: null,
       currentIndex: -1,
       title: ""
     };
   },
   methods: {
-    retrieveTutorials() {
+    retrieveDocuments() {
       DataService.getAll()
         .then(response => {
-          this.tutorials = response.data;
+          this.documents = response.data;
           console.log(response.data);
         })
         .catch(e => {
@@ -79,17 +79,17 @@ export default {
     },
 
     refreshList() {
-      this.retrieveTutorials();
-      this.currentTutorial = null;
+      this.retrieveDocuments();
+      this.currentDocument = null;
       this.currentIndex = -1;
     },
 
-    setActiveTutorial(tutorial, index) {
-      this.currentTutorial = tutorial;
-      this.currentIndex = tutorial ? index : -1;
+    setActiveDocument(document, index) {
+      this.currentDocument = document;
+      this.currentIndex = document ? index : -1;
     },
 
-    removeAllTutorials() {
+    removeAllDocuments() {
       DataService.deleteAll()
         .then(response => {
           console.log(response.data);
@@ -103,8 +103,8 @@ export default {
     searchTitle() {
       DataService.findByTitle(this.title)
         .then(response => {
-          this.tutorials = response.data;
-          this.setActiveTutorial(null);
+          this.documents = response.data;
+          this.setActiveDocument(null);
           console.log(response.data);
         })
         .catch(e => {
@@ -113,7 +113,7 @@ export default {
     }
   },
   mounted() {
-    this.retrieveTutorials();
+    this.retrieveDocuments();
   }
 };
 </script>

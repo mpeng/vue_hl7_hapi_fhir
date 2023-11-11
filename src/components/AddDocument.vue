@@ -8,7 +8,7 @@
           class="form-control"
           id="title"
           required
-          v-model="tutorial.title"
+          v-model="document.title"
           name="title"
         />
       </div>
@@ -19,17 +19,17 @@
           class="form-control"
           id="description"
           required
-          v-model="tutorial.description"
+          v-model="document.description"
           name="description"
         />
       </div>
 
-      <button @click="saveTutorial" class="btn btn-success">Submit</button>
+      <button @click="saveDocument" class="btn btn-success">Submit</button>
     </div>
 
     <div v-else>
       <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="newTutorial">Add</button>
+      <button class="btn btn-success" @click="newDocument">Add</button>
     </div>
   </div>
 </template>
@@ -38,10 +38,10 @@
 import DataService from "../services/DataService";
 
 export default {
-  name: "add-tutorial",
+  name: "add-document",
   data() {
     return {
-      tutorial: {
+      document: {
         id: null,
         title: "",
         description: "",
@@ -51,15 +51,15 @@ export default {
     };
   },
   methods: {
-    saveTutorial() {
+    saveDocument() {
       var data = {
-        title: this.tutorial.title,
-        description: this.tutorial.description
+        title: this.document.title,
+        description: this.document.description
       };
 
       DataService.create(data)
         .then(response => {
-          this.tutorial.id = response.data.id;
+          this.document.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
         })
@@ -68,9 +68,9 @@ export default {
         });
     },
     
-    newTutorial() {
+    newDocument() {
       this.submitted = false;
-      this.tutorial = {};
+      this.document = {};
     }
   }
 };

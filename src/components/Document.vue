@@ -1,28 +1,28 @@
 <template>
-  <div v-if="currentTutorial" class="edit-form">
+  <div v-if="currentDocument" class="edit-form">
     <h4>Document</h4>
     <form>
       <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" id="title"
-          v-model="currentTutorial.title"
+          v-model="currentDocument.title"
         />
       </div>
       <div class="form-group">
         <label for="description">Description</label>
         <input type="text" class="form-control" id="description"
-          v-model="currentTutorial.description"
+          v-model="currentDocument.description"
         />
       </div>
 
       <div class="form-group">
         <label><strong>Status:</strong></label>
-        {{ currentTutorial.published ? "Published" : "Pending" }}
+        {{ currentDocument.published ? "Published" : "Pending" }}
       </div>
     </form>
 
     <button class="btn btn-success"
-      v-if="currentTutorial.published"
+      v-if="currentDocument.published"
       @click="updatePublished(false)"
     >
       UnPublish
@@ -34,13 +34,13 @@
     </button>
 
     <button class="btn btn-failure"
-      @click="deleteTutorial"
+      @click="deleteDocument"
     >
       Delete
     </button>
 
     <button type="submit" class="btn btn-info"
-      @click="updateTutorial"
+      @click="updateDocument"
     >
       Update
     </button>
@@ -57,18 +57,18 @@
 import DataService from "../services/DataService";
 
 export default {
-  name: "tutorial",
+  name: "document",
   data() {
     return {
-      currentTutorial: null,
+      currentDocument: null,
       message: ''
     };
   },
   methods: {
-    getTutorial(id) {
+    getDocument(id) {
       DataService.get(id)
         .then(response => {
-          this.currentTutorial = response.data;
+          this.currentDocument = response.data;
           console.log(response.data);
         })
         .catch(e => {
@@ -78,16 +78,16 @@ export default {
 
     updatePublished(status) {
       var data = {
-        id: this.currentTutorial.id,
-        title: this.currentTutorial.title,
-        description: this.currentTutorial.description,
+        id: this.currentDocument.id,
+        title: this.currentDocument.title,
+        description: this.currentDocument.description,
         published: status
       };
 
-      DataService.update(this.currentTutorial.id, data)
+      DataService.update(this.currentDocument.id, data)
         .then(response => {
           console.log(response.data);
-          this.currentTutorial.published = status;
+          this.currentDocument.published = status;
           this.message = 'The status was updated successfully!';
         })
         .catch(e => {
@@ -95,22 +95,22 @@ export default {
         });
     },
 
-    updateTutorial() {
-      DataService.update(this.currentTutorial.id, this.currentTutorial)
+    updateDocument() {
+      DataService.update(this.currentDocument.id, this.currentDocument)
         .then(response => {
           console.log(response.data);
-          this.message = 'The tutorial was updated successfully!';
+          this.message = 'The document was updated successfully!';
         })
         .catch(e => {
           console.log(e);
         });
     },
 
-    deleteTutorial() {
-      DataService.delete(this.currentTutorial.id)
+    deleteDocument() {
+      DataService.delete(this.currentDocument.id)
         .then(response => {
           console.log(response.data);
-          this.$router.push({ name: "tutorials" });
+          this.$router.push({ name: "documents" });
         })
         .catch(e => {
           console.log(e);
@@ -119,7 +119,7 @@ export default {
   },
   mounted() {
     this.message = '';
-    this.getTutorial(this.$route.params.id);
+    this.getDocument(this.$route.params.id);
   }
 };
 </script>

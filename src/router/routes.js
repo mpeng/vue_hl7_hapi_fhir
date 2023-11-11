@@ -62,19 +62,19 @@ const routes = [
       },
 
       {
-        path: "/tutorials",
+        path: "/documents",
         name: "Browse documents",
-        component: () => import("../components/TutorialsList")
+        component: () => import("../components/DocumentList")
       },
       {
-        path: "/tutorials/:id",
-        name: "tutorial-details",
-        component: () => import("../components/Tutorial")
+        path: "/documents/:id",
+        name: "document-details",
+        component: () => import("../components/Document")
       },
       {
         path: "/add",
         name: "Add a document",
-        component: () => import("../components/AddTutorial")
+        component: () => import("../components/AddDocument")
       }
 
     ],

@@ -19,7 +19,7 @@
         />
 
         <sidebar-link
-          to="/tutorials"
+          to="/documents"
           name="Browse documents"
           icon="ti-files"
         />
