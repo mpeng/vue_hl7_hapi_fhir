@@ -17,6 +17,18 @@
           name="Organizations"
           icon="ti-map"
         />
+
+        <sidebar-link
+          to="/tutorials"
+          name="Browse documents"
+          icon="ti-user"
+        />
+
+        <sidebar-link
+          to="/add"
+          name="Add a document"
+          icon="ti-map"
+        />
         <!--
         <sidebar-link to="/typography" name="Typography" icon="ti-text" />
         <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2" />

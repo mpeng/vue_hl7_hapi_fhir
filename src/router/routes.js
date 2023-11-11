@@ -60,6 +60,23 @@ const routes = [
         name: "Organizations list",
         component: OrganizationsList,
       },
+
+      {
+        path: "/tutorials",
+        name: "Browse documents",
+        component: () => import("../components/TutorialsList")
+      },
+      {
+        path: "/tutorials/:id",
+        name: "tutorial-details",
+        component: () => import("../components/Tutorial")
+      },
+      {
+        path: "/add",
+        name: "Add a document",
+        component: () => import("../components/AddTutorial")
+      }
+
     ],
   },
   { path: "*", component: NotFound },
