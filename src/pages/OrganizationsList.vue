@@ -1,15 +1,6 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <card :title="table1.title" :subTitle="table1.subTitle">
-        <div slot="raw-content" class="table-responsive">
-          <paper-table :data="table1.data" :columns="table1.columns">
-          </paper-table>
-        </div>
-      </card>
-    </div>
-
-    <div class="col-12">
       <card class="card-plain">
         <div class="table-full-width table-responsive">
           <paper-table
@@ -27,40 +18,146 @@
 </template>
 <script>
 import { PaperTable } from "@/components";
-const tableColumns = ["Id", "Name", "Salary", "Country", "City"];
+const tableColumns = ["Id", "Organization", "Revenue", "Country", "City"];
 const tableData = [
   {
     id: 1,
-    name: "Dakota Rice",
-    salary: "$36.738",
+    organization: "Dakota Rice",
+    revenue: "$36.738",
     country: "Niger",
     city: "Oud-Turnhout",
   },
   {
     id: 2,
-    name: "Minerva Hooper",
-    salary: "$23,789",
+    organization: "Minerva Hooper",
+    revenue: "$23,789",
     country: "Curaçao",
     city: "Sinaai-Waas",
   },
   {
     id: 3,
-    name: "Sage Rodriguez",
-    salary: "$56,142",
+    organization: "Sage Rodriguez",
+    revenue: "$56,142",
     country: "Netherlands",
     city: "Baileux",
   },
   {
     id: 4,
-    name: "Philip Chaney",
-    salary: "$38,735",
+    organization: "Philip Chaney",
+    revenue: "$38,735",
     country: "Korea, South",
     city: "Overland Park",
   },
   {
     id: 5,
-    name: "Doris Greene",
-    salary: "$63,542",
+    organization: "Doris Greene",
+    revenue: "$63,542",
+    country: "Malawi",
+    city: "Feldkirchen in Kärnten",
+  },
+  {
+    id: 6,
+    organization: "Dakota Rice",
+    revenue: "$36.738",
+    country: "Niger",
+    city: "Oud-Turnhout",
+  },
+  {
+    id: 7,
+    organization: "Minerva Hooper",
+    revenue: "$23,789",
+    country: "Curaçao",
+    city: "Sinaai-Waas",
+  },
+  {
+    id: 8,
+    organization: "Sage Rodriguez",
+    revenue: "$56,142",
+    country: "Netherlands",
+    city: "Baileux",
+  },
+  {
+    id: 9,
+    organization: "Philip Chaney",
+    revenue: "$38,735",
+    country: "Korea, South",
+    city: "Overland Park",
+  },
+  {
+    id: 10,
+    organization: "Doris Greene",
+    revenue: "$63,542",
+    country: "Malawi",
+    city: "Feldkirchen in Kärnten",
+  },
+
+  {
+    id: 11,
+    organization: "Dakota Rice",
+    revenue: "$36.738",
+    country: "Niger",
+    city: "Oud-Turnhout",
+  },
+  {
+    id: 12,
+    organization: "Minerva Hooper",
+    revenue: "$23,789",
+    country: "Curaçao",
+    city: "Sinaai-Waas",
+  },
+  {
+    id: 13,
+    organization: "Sage Rodriguez",
+    revenue: "$56,142",
+    country: "Netherlands",
+    city: "Baileux",
+  },
+  {
+    id: 14,
+    organization: "Philip Chaney",
+    revenue: "$38,735",
+    country: "Korea, South",
+    city: "Overland Park",
+  },
+  {
+    id: 15,
+    organization: "Doris Greene",
+    revenue: "$63,542",
+    country: "Malawi",
+    city: "Feldkirchen in Kärnten",
+  },
+  {
+    id: 16,
+    organization: "Dakota Rice",
+    revenue: "$36.738",
+    country: "Niger",
+    city: "Oud-Turnhout",
+  },
+  {
+    id: 17,
+    organization: "Minerva Hooper",
+    revenue: "$23,789",
+    country: "Curaçao",
+    city: "Sinaai-Waas",
+  },
+  {
+    id: 18,
+    organization: "Sage Rodriguez",
+    revenue: "$56,142",
+    country: "Netherlands",
+    city: "Baileux",
+  },
+  {
+    id: 19,
+    organization: "Philip Chaney",
+    revenue: "$38,735",
+    country: "Korea, South",
+    city: "Overland Park",
+  },
+  {
+    id: 20,
+    organization: "Doris Greene",
+    revenue: "$63,542",
     country: "Malawi",
     city: "Feldkirchen in Kärnten",
   },
@@ -72,12 +169,7 @@ export default {
   },
   data() {
     return {
-      table1: {
-        title: "Organizations Table",
-        subTitle: "",
-        columns: [...tableColumns],
-        data: [...tableData],
-      },
+
       table2: {
         title: "Table on Plain Background",
         subTitle: "Here is a subtitle for this table",
