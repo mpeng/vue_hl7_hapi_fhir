@@ -1,24 +1,37 @@
 <template>
 
-  <div class="row">
-
-
-    <div class="submit-form">
-      <div class="col-md-8">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Search by ID"
-                 v-model="id"/>
-          <div class="input-group-append">
-            <button class="btn btn-icon" type="button"
-                    @click="searchID"
-            >
-              Search
-            </button>
+  <div>
+    <div class="inline">
+        <div class="submit-form">
+          <div class="col-md-8">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Search by ID"
+                     v-model="id"/>
+              <div class="input-group-append">
+                <button class="btn btn-icon" type="button"
+                        @click="searchID"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item2"
+                :class="{ active: index == currentIndex }"
+                v-for="(name, index) in names"
+                :key="index"
+                @click="setActiveDocument(name, index)"
+            >
+              {{ name.given[0] }} {{ name.family }}
+            </li>
+          </ul>
+        </div>
     </div>
 
+  <div class="row">
     <div class="col-12">
       <card class="card-plain">
         <div class="table-full-width table-responsive">
@@ -34,6 +47,7 @@
       </card>
     </div>
 
+  </div>
   </div>
 </template>
 <script>
@@ -193,6 +207,8 @@ export default {
   data() {
     return {
       documents: [],
+      names: [],
+      message: "",
       currentDocument: null,
       currentIndex: -1,
       title: "",
@@ -227,10 +243,20 @@ export default {
       HapiService.getPatientWithID(this.id)
         .then(response => {
           //this.document.id = response.data.id;
-          console.log( "====HapiService.getPatientWithID() BEGIN ====");
+          console.log("====HapiService.getPatientWithID() BEGIN ====");
           console.log(response);
-          console.log( "------------" );
+          console.log("------------");
           console.log(response.data);
+          if (response.data.status == 500) {
+            this.message = response.data.data;
+            console.log("Here1", this.message);
+          } else if (response.status == 200) {
+            this.names = response.data.name;
+            console.log("Here2", this.names);
+          }
+          console.log( "-----Name Begin-------" );
+
+          console.log( "-----Name End-------" );
           console.log( "====HapiService.getPatientWithID() END ====");
           //this.submitted = true;
         })
@@ -301,15 +327,32 @@ export default {
   .submit-form {
     min-width: 600px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 30px;
     margin-left: 10px;
     border: 5px none;
     text-align: left;
   }
 
+  .list-group-item2 {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    background-color: #000;
+    position: relative;
+    display: block;
+    color: #fff;
+    font-family: cursive;
+    font-size: larger;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    text-align: center;
+    border-radius: 10px;
+  }
   .input-group {
     width: 60%;
+  }
+  .inline {
+    display:inline-block;
   }
 
 </style>

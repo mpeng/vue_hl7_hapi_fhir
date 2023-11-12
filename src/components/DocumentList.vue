@@ -126,7 +126,7 @@ export default {
 .submit-form {
   min-width: 600px;
   margin: auto;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-bottom: 30px;
   margin-left: 10px;
   border: 5px none;
