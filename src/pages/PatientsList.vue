@@ -1,5 +1,23 @@
 <template>
+
   <div class="row">
+
+
+    <div class="submit-form">
+      <div class="col-md-8">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Search by ID"
+                 v-model="id"/>
+          <div class="input-group-append">
+            <button class="btn btn-icon" type="button"
+                    @click="searchID"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="col-12">
       <card class="card-plain">
@@ -164,12 +182,21 @@ const tableData = [
   },
 ];
 
+import DataService from "../services/DataService";
+import HapiService from "../services/HapiService";
+
 export default {
+  name: "patients-list",
   components: {
     PaperTable,
   },
   data() {
     return {
+      documents: [],
+      currentDocument: null,
+      currentIndex: -1,
+      title: "",
+      id: "",
       table1: {
         title: "Patients Table",
         subTitle: "",
@@ -178,6 +205,111 @@ export default {
       }
     };
   },
+  methods: {
+    retrieveDocuments() {
+      DataService.getAll()
+        .then(response => {
+          this.documents = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+    refreshList() {
+      this.retrieveDocuments();
+      this.currentDocument = null;
+      this.currentIndex = -1;
+    },
+
+    searchID() {
+      HapiService.getPatientWithID(this.id)
+        .then(response => {
+          //this.document.id = response.data.id;
+          console.log( "====HapiService.getPatientWithID() BEGIN ====");
+          console.log(response);
+          console.log( "------------" );
+          console.log(response.data);
+          console.log( "====HapiService.getPatientWithID() END ====");
+          //this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
+    testPatietnts() {
+      HapiService.getPatient()
+        .then(response => {
+          //this.document.id = response.data.id;
+          console.log( "====HapiService.getPatient() BEGIN ====");
+          console.log(response);
+          console.log( "------------" );
+          console.log(response.data);
+          console.log( "====HapiService.getPatient() END ====");
+          //this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+
+      HapiService.getPatientEntity()
+        .then(response => {
+          //this.document.id = response.data.id;
+          console.log( "====HapiService.getPatientEntity() BEGIN ====");
+          console.log(response);
+          console.log( "------------" );
+          console.log(response.data);
+          console.log( "====HapiService.getPatientEntity() END ====");
+          //this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      HapiService.getPatientWithID(34596971)
+        .then(response => {
+          //this.document.id = response.data.id;
+          console.log( "====HapiService.getPatientWithID() BEGIN ====");
+          console.log(response);
+          console.log( "------------" );
+          console.log(response.data);
+          console.log( "====HapiService.getPatientWithID() END ====");
+          //this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+    }
+  },
+  mounted() {
+    this.retrieveDocuments();
+  }
 };
 </script>
-<style></style>
+<style>
+
+  .list {
+    text-align: left;
+    max-width: 750px;
+    margin: auto;
+  }
+
+  .submit-form {
+    min-width: 600px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-left: 10px;
+    border: 5px none;
+    text-align: left;
+  }
+
+  .input-group {
+    width: 60%;
+  }
+
+</style>

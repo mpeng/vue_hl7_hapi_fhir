@@ -67,49 +67,6 @@ export default {
         .catch(e => {
           console.log(e);
         });
-
-      HapiService.getPatient()
-        .then(response => {
-          //this.document.id = response.data.id;
-          console.log( "====HapiService.getPatient() BEGIN ====");
-          console.log(response);
-          console.log( "------------" );
-          console.log(response.data);
-          console.log( "====HapiService.getPatient() END ====");
-          //this.submitted = true;
-        })
-        .catch(e => {
-          console.log(e);
-        });
-
-
-      HapiService.getPatientEntity()
-        .then(response => {
-          //this.document.id = response.data.id;
-          console.log( "====HapiService.getPatientEntity() BEGIN ====");
-          console.log(response);
-          console.log( "------------" );
-          console.log(response.data);
-          console.log( "====HapiService.getPatientEntity() END ====");
-          //this.submitted = true;
-        })
-        .catch(e => {
-          console.log(e);
-        });
-
-      HapiService.getPatientWithID(34596971)
-        .then(response => {
-          //this.document.id = response.data.id;
-          console.log( "====HapiService.getPatientWithID() BEGIN ====");
-          console.log(response);
-          console.log( "------------" );
-          console.log(response.data);
-          console.log( "====HapiService.getPatientWithID() END ====");
-          //this.submitted = true;
-        })
-        .catch(e => {
-          console.log(e);
-        });
     },
     
     newDocument() {
@@ -124,8 +81,9 @@ export default {
 .submit-form {
   min-width: 600px;
   margin: auto;
-  margin-top: 100px;
-  margin-bottom: 300px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 10px;
 }
 
 .form-group {

@@ -51,13 +51,13 @@ const routes = [
       },
       {
         path: "patients-list",
-        name: "Patients list",
+        name: "Patients",
         component: PatientsList,
       },
 
       {
         path: "organizations-list",
-        name: "Organizations list",
+        name: "Organizations",
         component: OrganizationsList,
       },
 

@@ -126,8 +126,9 @@ export default {
 .submit-form {
   min-width: 600px;
   margin: auto;
-  margin-top: 100px;
-  margin-bottom: 300px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 10px;
   border: 5px none;
   text-align: left;
 }
