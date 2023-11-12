@@ -72,8 +72,39 @@ export default {
         .then(response => {
           //this.document.id = response.data.id;
           console.log( "====HapiService.getPatient() BEGIN ====");
+          console.log(response);
+          console.log( "------------" );
           console.log(response.data);
           console.log( "====HapiService.getPatient() END ====");
+          //this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+
+      HapiService.getPatientEntity()
+        .then(response => {
+          //this.document.id = response.data.id;
+          console.log( "====HapiService.getPatientEntity() BEGIN ====");
+          console.log(response);
+          console.log( "------------" );
+          console.log(response.data);
+          console.log( "====HapiService.getPatientEntity() END ====");
+          //this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      HapiService.getPatientWithID(34596971)
+        .then(response => {
+          //this.document.id = response.data.id;
+          console.log( "====HapiService.getPatientWithID() BEGIN ====");
+          console.log(response);
+          console.log( "------------" );
+          console.log(response.data);
+          console.log( "====HapiService.getPatientWithID() END ====");
           //this.submitted = true;
         })
         .catch(e => {
