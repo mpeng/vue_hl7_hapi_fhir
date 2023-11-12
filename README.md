@@ -1,4 +1,4 @@
-# [Vue Health Institute] (https://vuehealth.herokuapp.com)
+# Vue Health Institute 
 
 ## vue-demo
 Front end application that accesses API provided by  Spring Boot application ( see (https://github.com/mpeng/springboot-hapi-fhir-mysql-mongo) )
