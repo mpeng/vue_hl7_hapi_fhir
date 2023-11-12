@@ -36,6 +36,7 @@
 
 <script>
 import DataService from "../services/DataService";
+import HapiService from "../services/HapiService";
 
 export default {
   name: "add-document",
@@ -62,6 +63,18 @@ export default {
           this.document.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+
+      HapiService.getPatient()
+        .then(response => {
+          //this.document.id = response.data.id;
+          console.log( "====HapiService.getPatient() BEGIN ====");
+          console.log(response.data);
+          console.log( "====HapiService.getPatient() END ====");
+          //this.submitted = true;
         })
         .catch(e => {
           console.log(e);
