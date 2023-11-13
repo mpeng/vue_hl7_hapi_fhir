@@ -1,6 +1,6 @@
 <template>
   <span
-    >Welcome to <b>Vue Health Institute</b></span
+    >Welcome to <b>Vue HL7 - hapi fhir</b></span
   >
 </template>
 

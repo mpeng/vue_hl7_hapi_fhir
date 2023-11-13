@@ -1,5 +1,5 @@
 {
-  "name": "vue-health-institute",
+  "name": "vue-hl7-hapi-fhir",
   "version": "1.0.1",
   "private": true,
   "scripts": {

@@ -21,7 +21,7 @@ const routes = [
     children: [
       {
         path: "dashboard",
-        name: "Welcome to Vue Health Institute",
+        name: "Welcome to Vue HL7 - hapi fhir",
         component: Dashboard,
       },
       {

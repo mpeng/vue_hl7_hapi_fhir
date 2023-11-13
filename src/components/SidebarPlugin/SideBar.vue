@@ -43,7 +43,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue Health Institute",
+      default: "Vue HL7 - hapi fhir",
     },
     backgroundColor: {
       type: String,
