@@ -47,11 +47,27 @@
       </card>
     </div>
 
+    <div class="col-12">
+      <card class="card-plain">
+        <div class="table-full-width table-responsive">
+          <paper-table
+            type="hover"
+            :title="patientTable.title"
+            :sub-title="patientTable.subTitle"
+            :data="patientTable.data"
+            :columns="patientTable.columns"
+          >
+          </paper-table>
+        </div>
+      </card>
+    </div>
+
   </div>
   </div>
 </template>
 <script>
 import { PaperTable } from "@/components";
+
 const tableColumns = ["Id", "Name", "Salary", "Country", "City"];
 const tableData = [
   {
@@ -196,8 +212,18 @@ const tableData = [
   },
 ];
 
+const patientColumns = ["Id", "FamilyName", "GivenName", "FullUrl"];
+let patientData = [
+  {
+    id: 592825,
+    familyname: "Cushing",
+    givenname: "Caleb",
+    fullurl: "https://hapi.fhir.org/baseR4/Patient/592841",
+  }];
+
 import DataService from "../services/DataService";
 import HapiService from "../services/HapiService";
+import FhirService from "../services/FhirService";
 
 export default {
   name: "patients-list",
@@ -218,6 +244,12 @@ export default {
         subTitle: "",
         columns: [...tableColumns],
         data: [...tableData],
+      },
+      patientTable: {
+        title: "Patients Table",
+        subTitle: "Hello",
+        columns: [...patientColumns],
+        data: [...patientData],
       }
     };
   },
@@ -263,22 +295,61 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    },
 
-    testPatietnts() {
-      HapiService.getPatient()
+
+
+
+      FhirService.getPatients()
         .then(response => {
           //this.document.id = response.data.id;
-          console.log( "====HapiService.getPatient() BEGIN ====");
-          console.log(response);
-          console.log( "------------" );
-          console.log(response.data);
-          console.log( "====HapiService.getPatient() END ====");
-          //this.submitted = true;
+          console.log("====FhirService.getPatients() BEGIN ====");
+
+          console.log(response.data.data.entry.length);
+          console.log(response.data.data.entry);
+          console.log(response.data.data.entry[0].fullUrl);
+          console.log(response.data.data.entry[0].resource.name[0].family);
+
+          let entry = response.data.data.entry;
+          let op = [];
+
+
+          for (let i = 0; i < entry.length; i++) {
+            let e = entry[i];
+            if ( e.resource.name && e.resource.name.length > 0 ) {
+              console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
+              op.push(
+                {id: `${e.resource.id}`,
+                  familyname: `${ e.resource.name[0].family }`,
+                  givenname: `${ e.resource.name[0].given[0] }`,
+                  fullurl: `${ e.fullUrl }` }
+              );
+            }
+          }
+
+          patientData = op;
+
+          console.log(op)
+          console.log( "====FhirService.getPatients() END ====");
         })
         .catch(e => {
           console.log(e);
         });
+    },
+
+    testPatietnts() {
+        HapiService.getPatient()
+          .then(response => {
+            //this.document.id = response.data.id;
+            console.log( "====HapiService.getPatient() BEGIN ====");
+            console.log(response);
+            console.log( "------------" );
+            console.log(response.data);
+            console.log( "====HapiService.getPatient() END ====");
+            //this.submitted = true;
+          })
+          .catch(e => {
+            console.log(e);
+          });
 
 
       HapiService.getPatientEntity()
