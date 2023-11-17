@@ -61,12 +61,24 @@
         </div>
       </card>
     </div>
-
   </div>
+
+    <button class="btn btn-icon" @click="getSelectedRows()">Get Selected Rows</button>
+    <ag-grid-vue style="height: 500px;margin-top: 10px;"
+                 class="ag-theme-alpine"
+                 :columnDefs="columnDefs"
+                 :rowData="rowData"
+                 :autoGroupColumnDef="autoGroupColumnDef"
+                 @grid-ready="onGridReady">
+    </ag-grid-vue>
+
   </div>
 </template>
 <script>
 import { PaperTable } from "@/components";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import { AgGridVue } from "ag-grid-vue";
 
 const tableColumns = ["Id", "Name", "Salary", "Country", "City"];
 const tableData = [
@@ -229,6 +241,27 @@ export default {
   name: "patients-list",
   components: {
     PaperTable,
+    AgGridVue,
+  },
+
+  beforeMount() {
+    this.columnDefs = [
+      { field: 'make', sortable: true, filter: true, checkboxSelection: true },
+      { field: 'model', sortable: true, filter: true },
+      { field: 'price', sortable: true, filter: true }
+    ];
+
+    /*
+    this.rowData = [
+      {make: "Toyota", model: "Celica", price: 35000},
+      {make: "Ford", model: "Mondeo", price: 32000},
+      {make: "Porsche", model: "Boxster", price: 72000},
+    ];
+     */
+
+    fetch('https://www.ag-grid.com/example-assets/row-data.json')
+      .then(result => result.json())
+      .then(rowData => this.rowData = rowData);
   },
   data() {
     return {
@@ -250,10 +283,38 @@ export default {
         subTitle: "Hello",
         columns: [...patientColumns],
         data: [...patientData],
+      },
+      columnDefs: null,
+      rowData: null,
+      gridApi: null,
+      columnApi: null,
+      rowSelection: 'multiple',
+      autoGroupColumnDef: {
+        headerName: 'Model',
+        field: 'model',
+        cellRenderer: 'agGroupCellRenderer',
+        cellRendererParams: {
+          checkbox: true
+        }
       }
     };
   },
+  created() {
+    this.rowSelection = 'multiple';
+  },
   methods: {
+
+    onGridReady(params) {
+          this.gridApi = params.api;
+          this.columnApi = params.columnApi;
+    },
+    getSelectedRows() {
+          const selectedNodes = this.gridApi.getSelectedNodes();
+          const selectedData = selectedNodes.map( node => node.data );
+          const selectedDataStringPresentation = selectedData.map( data => `${data.make} ${data.model}`).join(', ');
+          alert(`Selected nodes: ${selectedDataStringPresentation}`);
+    },
+
     retrieveDocuments() {
       DataService.getAll()
         .then(response => {
@@ -336,51 +397,7 @@ export default {
         });
     },
 
-    testPatietnts() {
-        HapiService.getPatient()
-          .then(response => {
-            //this.document.id = response.data.id;
-            console.log( "====HapiService.getPatient() BEGIN ====");
-            console.log(response);
-            console.log( "------------" );
-            console.log(response.data);
-            console.log( "====HapiService.getPatient() END ====");
-            //this.submitted = true;
-          })
-          .catch(e => {
-            console.log(e);
-          });
 
-
-      HapiService.getPatientEntity()
-        .then(response => {
-          //this.document.id = response.data.id;
-          console.log( "====HapiService.getPatientEntity() BEGIN ====");
-          console.log(response);
-          console.log( "------------" );
-          console.log(response.data);
-          console.log( "====HapiService.getPatientEntity() END ====");
-          //this.submitted = true;
-        })
-        .catch(e => {
-          console.log(e);
-        });
-
-      HapiService.getPatientWithID(34596971)
-        .then(response => {
-          //this.document.id = response.data.id;
-          console.log( "====HapiService.getPatientWithID() BEGIN ====");
-          console.log(response);
-          console.log( "------------" );
-          console.log(response.data);
-          console.log( "====HapiService.getPatientWithID() END ====");
-          //this.submitted = true;
-        })
-        .catch(e => {
-          console.log(e);
-        });
-
-    }
   },
   mounted() {
     this.retrieveDocuments();
@@ -388,6 +405,8 @@ export default {
 };
 </script>
 <style>
+  @import "~ag-grid-community/styles/ag-grid.css";
+  @import "~ag-grid-community/styles/ag-theme-alpine.css";
 
   .list {
     text-align: left;
