@@ -12,6 +12,7 @@ import Typography from "@/pages/Typography.vue";
 import TableList from "@/pages/TableList.vue";
 import PatientsList from "@/pages/PatientsList.vue";
 import OrganizationsList from "@/pages/OrganizationsList.vue";
+import PatientTabView from "@/pages/PatientTabView.vue";
 
 const routes = [
   {
@@ -54,7 +55,11 @@ const routes = [
         name: "Patients",
         component: PatientsList,
       },
-
+      {
+        path: "patient-Tab-View",
+        name: "Patient Tab View",
+        component: PatientTabView,
+      },
       {
         path: "organizations-list",
         name: "Organizations",

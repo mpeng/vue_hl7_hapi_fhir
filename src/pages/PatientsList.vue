@@ -35,7 +35,7 @@
     <!--
     <button class="btn btn-success" @click="getSelectedRows()">Get Selected Rows</button>
     -->
-      <ag-grid-vue style="width: 100%; height: 520px;margin-top: 10px;"
+      <ag-grid-vue style="width: 100%; height: 520px;margin-top: 0px;"
                    class="ag-theme-alpine-dark"
                    :enableCellTextSelection="true"
                    :columnDefs="patientColumnDefs"
@@ -78,7 +78,7 @@ function isNumber(string){
 };
 
 export default {
-  name: "patients-list",
+  name: "PatientList",
   components: {
     PaperTable,
     AgGridVue,

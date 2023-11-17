@@ -29,6 +29,12 @@
           name="Add a document"
           icon="ti-upload"
         />
+
+        <sidebar-link
+          to="/patient-Tab-View"
+          name="Patient Tab View"
+          icon="ti-layout-tab-window"
+        />
         <!--
         <sidebar-link to="/typography" name="Typography" icon="ti-text" />
         <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2" />
