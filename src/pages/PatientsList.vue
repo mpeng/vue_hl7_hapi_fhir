@@ -59,6 +59,13 @@ import '../assets/css/style.css';
 import DataService from "../services/DataService";
 import HapiService from "../services/HapiService";
 import FhirService from "../services/FhirService";
+import moment from "moment";
+
+const FORMAT = "MMM D, yyyy";
+
+function   capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 export default {
   name: "patients-list",
@@ -67,12 +74,15 @@ export default {
     AgGridVue,
   },
 
+
+
   beforeMount() {
     this.patientColumnDefs = [
-      { field: 'id', sortable: true, filter: true, checkboxSelection: true },
-      { field: 'familyName', sortable: true, filter: true },
-      { field: 'givenName', sortable: true, filter: true },
-      { field: 'fullUrl', sortable: true, filter: true }
+      { field: 'id', sortable: true, filter: true, checkboxSelection: true, minWidth: 20 },
+      { field: 'familyName', sortable: true, filter: true, minWidth: 140 },
+      { field: 'givenName', sortable: true, filter: true, minWidth: 100 },
+      { field: 'gender', sortable: true, filter: true, minWidth: 30 },
+      { field: 'birthday', sortable: true, filter: true, minWidth: 130, }
     ];
 
     FhirService.getPatients()
@@ -87,9 +97,11 @@ export default {
             console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
             op.push(
               {id: `${e.resource.id}`,
-                familyName: `${ e.resource.name[0].family }`,
-                givenName: `${ e.resource.name[0].given[0] }`,
-                fullUrl: `${ e.fullUrl }` }
+                familyName: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
+                givenName: `${ capitalizeFirstLetter(e.resource.name[0].given[0]) }`,
+                gender: `${ e.resource.gender ? capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
+                birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`
+              }
             );
           }
         }
