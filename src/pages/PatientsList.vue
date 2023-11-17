@@ -31,41 +31,23 @@
         </div>
     </div>
 
-  <div class="row">
-    <div class="col-12">
-      <card class="card-plain">
-        <div class="table-full-width table-responsive">
-          <paper-table
-            type="hover"
-            :title="table1.title"
-            :sub-title="table1.subTitle"
-            :data="table1.data"
-            :columns="table1.columns"
-          >
-          </paper-table>
-        </div>
-      </card>
-    </div>
-
-    <div class="col-12">
-      <card class="card-plain">
-        <div class="table-full-width table-responsive">
-          <paper-table
-            type="hover"
-            :title="patientTable.title"
-            :sub-title="patientTable.subTitle"
-            :data="patientTable.data"
-            :columns="patientTable.columns"
-          >
-          </paper-table>
-        </div>
-      </card>
-    </div>
-  </div>
 
     <button class="btn btn-icon" @click="getSelectedRows()">Get Selected Rows</button>
 
-    <ag-grid-vue style="width: 100%; height: 600px;margin-top: 10px;"
+
+    <ag-grid-vue style="width: 100%; height: 200px;margin-top: 10px;"
+                 class="ag-theme-alpine-dark"
+                 :columnDefs="patientColumnDefs"
+                 :rowData="patientRowData"
+                 :defaultColDef="defaultColDef"
+                 :getRowHeight="getRowHeight"
+                 :isFullWidthRow="isFullWidthRow"
+                 :fullWidthCellRenderer="fullWidthCellRenderer"
+                 :autoGroupColumnDef="autoGroupColumnDef"
+                 @grid-ready="onGridReady">
+    </ag-grid-vue>
+
+    <ag-grid-vue style="width: 100%; height: 800px;margin-top: 10px;"
                  class="ag-theme-alpine-dark"
                  :columnDefs="columnDefs"
                  :rowData="rowData"
@@ -82,25 +64,14 @@
   </div>
 </template>
 <script>
+
 import { PaperTable } from "@/components";
+import { ref } from 'vue'
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-//import "ag-grid-community/dist/styles/ag-theme-balham-dark.css";
 import { AgGridVue } from "ag-grid-vue";
 import FullWidthCellRenderer from './fullWidthCellRendererVue.js';
 import '../assets/css/style.css';
-
-const tableColumns = ["Id", "Name", "Salary", "Country", "City"];
-const tableData = [
-  {
-    id: 1,
-    name: "Dakota Rice",
-    salary: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
-  }
-
-];
 
 const patientColumns = ["Id", "FamilyName", "GivenName", "FullUrl"];
 let patientData = [
@@ -129,10 +100,40 @@ export default {
       { field: 'price', sortable: true, filter: true }
     ];
 
+    this.patientColumnDefs = [
+      { field: 'id', sortable: true, filter: true, checkboxSelection: true },
+      { field: 'familyName', sortable: true, filter: true },
+      { field: 'givenName', sortable: true, filter: true },
+      { field: 'fullUrl', sortable: true, filter: true }
+    ];
+
 
     fetch('https://www.ag-grid.com/example-assets/row-data.json')
       .then(result => result.json())
       .then(rowData => this.rowData = rowData);
+
+
+    FhirService.getPatients()
+      .then(response => {
+        let entry = response.data.data.entry;
+        let op = [];
+
+        for (let i = 0; i < entry.length; i++) {
+          let e = entry[i];
+          if ( e.resource.name && e.resource.name.length > 0 ) {
+            console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
+            op.push(
+              {id: `${e.resource.id}`,
+                familyName: `${ e.resource.name[0].family }`,
+                givenName: `${ e.resource.name[0].given[0] }`,
+                fullUrl: `${ e.fullUrl }` }
+            );
+          }
+        }
+        this.patientRowData = op;
+      }).catch(e => {
+        console.log(e);
+      });
   },
   data() {
     return {
@@ -143,12 +144,6 @@ export default {
       currentIndex: -1,
       title: "",
       id: "",
-      table1: {
-        title: "Patients Table",
-        subTitle: "",
-        columns: [...tableColumns],
-        data: [...tableData],
-      },
       patientTable: {
         title: "Patients Table",
         subTitle: "Hello",
@@ -157,6 +152,8 @@ export default {
       },
       columnDefs: null,
       rowData: null,
+      patientColumnDefs: null,
+      patientRowData: null,
       getRowHeight: null,
       isFullWidthRow: null,
       fullWidthCellRenderer: null,
@@ -182,6 +179,7 @@ export default {
   created() {
     this.rowSelection = 'multiple';
     this.rowData = getData();
+    this.patientRowData = getData();
     this.getRowHeight = (params) => {
       // return 100px height for full width rows
       if (isFullWidth(params.data)) {
@@ -297,15 +295,11 @@ export default {
 };
 
 window.isFullWidth = function isFullWidth(data) {
-  // return true when country is Peru, France or Italy
   return true;
 };
 
 </script>
 <style>
-  @import "~ag-grid-community/styles/ag-grid.css";
-  @import "~ag-grid-community/styles/ag-theme-alpine.css";
-
   .list {
     text-align: left;
     max-width: 750px;
