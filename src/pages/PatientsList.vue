@@ -35,7 +35,7 @@
     <button class="btn btn-icon" @click="getSelectedRows()">Get Selected Rows</button>
 
 
-    <ag-grid-vue style="width: 100%; height: 200px;margin-top: 10px;"
+    <ag-grid-vue style="width: 100%; height: 800px;margin-top: 10px;"
                  class="ag-theme-alpine-dark"
                  :columnDefs="patientColumnDefs"
                  :rowData="patientRowData"
@@ -46,20 +46,6 @@
                  :autoGroupColumnDef="autoGroupColumnDef"
                  @grid-ready="onGridReady">
     </ag-grid-vue>
-
-    <ag-grid-vue style="width: 100%; height: 800px;margin-top: 10px;"
-                 class="ag-theme-alpine-dark"
-                 :columnDefs="columnDefs"
-                 :rowData="rowData"
-                 :defaultColDef="defaultColDef"
-                 :getRowHeight="getRowHeight"
-                 :isFullWidthRow="isFullWidthRow"
-                 :fullWidthCellRenderer="fullWidthCellRenderer"
-                 :autoGroupColumnDef="autoGroupColumnDef"
-                 @grid-ready="onGridReady">
-    </ag-grid-vue>
-
-
 
   </div>
 </template>
@@ -72,16 +58,6 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import { AgGridVue } from "ag-grid-vue";
 import FullWidthCellRenderer from './fullWidthCellRendererVue.js';
 import '../assets/css/style.css';
-
-const patientColumns = ["Id", "FamilyName", "GivenName", "FullUrl"];
-let patientData = [
-  {
-    id: 592825,
-    familyname: "Cushing",
-    givenname: "Caleb",
-    fullurl: "https://hapi.fhir.org/baseR4/Patient/592841",
-  }];
-
 import DataService from "../services/DataService";
 import HapiService from "../services/HapiService";
 import FhirService from "../services/FhirService";
@@ -94,24 +70,12 @@ export default {
   },
 
   beforeMount() {
-    this.columnDefs = [
-      { field: 'make', sortable: true, filter: true, checkboxSelection: true },
-      { field: 'model', sortable: true, filter: true },
-      { field: 'price', sortable: true, filter: true }
-    ];
-
     this.patientColumnDefs = [
       { field: 'id', sortable: true, filter: true, checkboxSelection: true },
       { field: 'familyName', sortable: true, filter: true },
       { field: 'givenName', sortable: true, filter: true },
       { field: 'fullUrl', sortable: true, filter: true }
     ];
-
-
-    fetch('https://www.ag-grid.com/example-assets/row-data.json')
-      .then(result => result.json())
-      .then(rowData => this.rowData = rowData);
-
 
     FhirService.getPatients()
       .then(response => {
@@ -144,14 +108,7 @@ export default {
       currentIndex: -1,
       title: "",
       id: "",
-      patientTable: {
-        title: "Patients Table",
-        subTitle: "Hello",
-        columns: [...patientColumns],
-        data: [...patientData],
-      },
-      columnDefs: null,
-      rowData: null,
+
       patientColumnDefs: null,
       patientRowData: null,
       getRowHeight: null,
@@ -178,10 +135,8 @@ export default {
   },
   created() {
     this.rowSelection = 'multiple';
-    this.rowData = getData();
     this.patientRowData = getData();
     this.getRowHeight = (params) => {
-      // return 100px height for full width rows
       if (isFullWidth(params.data)) {
         return 100;
       }
@@ -205,28 +160,9 @@ export default {
           alert(`Selected nodes: ${selectedDataStringPresentation}`);
     },
 
-    retrieveDocuments() {
-      DataService.getAll()
-        .then(response => {
-          this.documents = response.data;
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-
-    refreshList() {
-      this.retrieveDocuments();
-      this.currentDocument = null;
-      this.currentIndex = -1;
-    },
-
     searchID() {
       HapiService.getPatientWithID(this.id)
         .then(response => {
-          //this.document.id = response.data.id;
-          console.log("====HapiService.getPatientWithID() BEGIN ====");
           console.log(response);
           console.log("------------");
           console.log(response.data);
@@ -237,60 +173,12 @@ export default {
             this.names = response.data.name;
             console.log("Here2", this.names);
           }
-          console.log( "-----Name Begin-------" );
-
-          console.log( "-----Name End-------" );
-          console.log( "====HapiService.getPatientWithID() END ====");
-          //this.submitted = true;
-        })
-        .catch(e => {
-          console.log(e);
-        });
-
-
-
-
-      FhirService.getPatients()
-        .then(response => {
-          //this.document.id = response.data.id;
-          console.log("====FhirService.getPatients() BEGIN ====");
-
-          console.log(response.data.data.entry.length);
-          console.log(response.data.data.entry);
-          console.log(response.data.data.entry[0].fullUrl);
-          console.log(response.data.data.entry[0].resource.name[0].family);
-
-          let entry = response.data.data.entry;
-          let op = [];
-
-
-          for (let i = 0; i < entry.length; i++) {
-            let e = entry[i];
-            if ( e.resource.name && e.resource.name.length > 0 ) {
-              console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
-              op.push(
-                {id: `${e.resource.id}`,
-                  familyname: `${ e.resource.name[0].family }`,
-                  givenname: `${ e.resource.name[0].given[0] }`,
-                  fullurl: `${ e.fullUrl }` }
-              );
-            }
-          }
-
-          patientData = op;
-
-          console.log(op)
-          console.log( "====FhirService.getPatients() END ====");
-        })
-        .catch(e => {
+        }).catch(e => {
           console.log(e);
         });
     },
-
-
   },
   mounted() {
-    this.retrieveDocuments();
   }
 };
 
