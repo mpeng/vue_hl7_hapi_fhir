@@ -6,6 +6,7 @@
           <div class="col-md-8">
             <div class="input-group mb-3">
               <input type="text" class="form-control text-success" placeholder="Search by id or name"
+                     onKeyDown={this.onKeyDown}
                      v-model="id"/>
               <div class="input-group-append">
                 <button class="btn btn-success" type="button"
@@ -35,6 +36,7 @@
     <button class="btn btn-success" @click="getSelectedRows()">Get Selected Rows</button>
       <ag-grid-vue style="width: 100%; height: 500px;margin-top: 10px;"
                    class="ag-theme-alpine-dark"
+                   :enableCellTextSelection="true"
                    :columnDefs="patientColumnDefs"
                    :rowData="patientRowData"
                    :defaultColDef="defaultColDef"
@@ -142,8 +144,38 @@ export default {
     };
     this.fullWidthCellRenderer = 'FullWidthCellRenderer';
 
+    window.addEventListener('keydown', (e) => {
+      console.log( "Hello===");
+      if (e.key == 'Enter') {
+        this.showModal = !this.showModal;
+      }
+    });
+
   },
   methods: {
+
+    onKeyup(event) {
+      /*
+      console.log( "onKeyup" );
+      if (event.key === "Enter") {
+        this.text = this.draft + "";
+        this.draft = "";
+      } else {
+        this.draft += event.key;
+      }
+       */
+    },
+
+    onKeyDown(e){
+      //console.log( "onKeyDown" );
+      // 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log( "Enter detected" );
+        this.searchPatientByIDOrName();
+      }
+    },
 
     onGridReady(params) {
           this.gridApi = params.api;
@@ -247,7 +279,13 @@ export default {
     },
   },
   mounted() {
-  }
+    document.addEventListener("keyup", this.onKeyup);
+    document.addEventListener("keydown", this.onKeyDown);
+  },
+  beforeDestroy() {
+    document.removeEventListener("keyup", this.onKeyup);
+    document.removeEventListener("keydown", this.onKeyDown);
+  },
 };
 
 window.isFullWidth = function isFullWidth(data) {
