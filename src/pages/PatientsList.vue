@@ -33,21 +33,19 @@
 
 
     <button class="btn btn-icon" @click="getSelectedRows()">Get Selected Rows</button>
-
-
-    <ag-grid-vue style="width: 100%; height: 800px;margin-top: 10px;"
-                 class="ag-theme-alpine-dark"
-                 :columnDefs="patientColumnDefs"
-                 :rowData="patientRowData"
-                 :defaultColDef="defaultColDef"
-                 :getRowHeight="getRowHeight"
-                 :isFullWidthRow="isFullWidthRow"
-                 :fullWidthCellRenderer="fullWidthCellRenderer"
-                 :autoGroupColumnDef="autoGroupColumnDef"
-                 @grid-ready="onGridReady">
-    </ag-grid-vue>
-
+      <ag-grid-vue style="width: 100%; height: 800px;margin-top: 10px;"
+                   class="ag-theme-alpine-dark"
+                   :columnDefs="patientColumnDefs"
+                   :rowData="patientRowData"
+                   :defaultColDef="defaultColDef"
+                   :getRowHeight="getRowHeight"
+                   :isFullWidthRow="isFullWidthRow"
+                   :fullWidthCellRenderer="fullWidthCellRenderer"
+                   :autoGroupColumnDef="autoGroupColumnDef"
+                   @grid-ready="onGridReady">
+      </ag-grid-vue>
   </div>
+
 </template>
 <script>
 
