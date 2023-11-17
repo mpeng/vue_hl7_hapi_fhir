@@ -13,7 +13,7 @@ class FhirService {
 
   getPatientByName(data) {
     console.log( "getPatientByName::data", data );
-    return http.post("/getPatientByName", data);
+    return http.post("/getPatientByName", {"name": data});
   }
 
 }

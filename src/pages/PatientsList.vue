@@ -5,11 +5,11 @@
         <div class="submit-form">
           <div class="col-md-8">
             <div class="input-group mb-3">
-              <input type="text" class="form-control text-success" placeholder="Search by ID"
+              <input type="text" class="form-control text-success" placeholder="Search by id or name"
                      v-model="id"/>
               <div class="input-group-append">
                 <button class="btn btn-success" type="button"
-                        @click="searchID"
+                        @click="searchPatientByIDOrName"
                 >
                   Search
                 </button>
@@ -65,6 +65,13 @@ const FORMAT = "MMM D, yyyy";
 
 function   capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+function isNumber(string){
+  if(typeof string === "string"){
+    return(!isNaN(string));
+  }
+  return false;
 };
 
 export default {
@@ -171,22 +178,65 @@ export default {
           alert(`Selected nodes: ${selectedDataStringPresentation}`);
     },
 
-    searchID() {
+
+    searchPatientByIDOrName() {
+      console.log( this.id );
+      isNumber(this.id) ? this.searchPatientByID() : this.searchPatientByName();
+    },
+
+    searchPatientByID() {
       HapiService.getPatientWithID(this.id)
         .then(response => {
           console.log(response);
-          console.log("------------");
-          console.log(response.data);
-          if (response.data.status == 500) {
-            this.message = response.data.data;
-            console.log("Here1", this.message);
-          } else if (response.status == 200) {
-            this.names = response.data.name;
-            console.log("Here2", this.names);
-          }
+          let e = response.data;
+          let op = [];
+
+            console.log( e );
+            if ( e.name && e.name.length > 0 ) {
+              console.log(e.name[0].family, e.name[0].given[0]);
+              op.push(
+                {id: `${e.id}`,
+                  familyName: `${ capitalizeFirstLetter(e.name[0].family) }`,
+                  givenName: `${ capitalizeFirstLetter(e.name[0].given[0]) }`,
+                  gender: `${ e.gender ? capitalizeFirstLetter(e.gender) : "N.A." }`,
+                  birthday: `${ e.birthDate ? moment(e.birthDate).format(FORMAT) : "N.A." }`
+                }
+              );
+            }
+
+          this.patientRowData = op;
         }).catch(e => {
           console.log(e);
         });
+    },
+
+
+    searchPatientByName() {
+      FhirService.getPatientByName(this.id)
+        .then(response => {
+          console.log(response);
+          let entry = response.data.data.entry;
+          let op = [];
+
+          for (let i = 0; i < entry.length; i++) {
+            let e = entry[i];
+            console.log( e );
+            if ( e.resource.name && e.resource.name.length > 0 ) {
+              console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
+              op.push(
+                {id: `${e.resource.id}`,
+                  familyName: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
+                  givenName: `${ capitalizeFirstLetter(e.resource.name[0].given[0]) }`,
+                  gender: `${ e.resource.gender ? capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
+                  birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`
+                }
+              );
+            }
+          }
+          this.patientRowData = op;
+        }).catch(e => {
+        console.log(e);
+      });
     },
   },
   mounted() {
