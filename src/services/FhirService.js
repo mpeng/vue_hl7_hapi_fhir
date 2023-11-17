@@ -7,12 +7,12 @@ class FhirService {
   }
 
   getListByResourceType(data) {
-    console.log( "getListByResourceType::data = ", data );
+    //console.log( "getListByResourceType::data = ", data );
     return http.post("/getListByResourceType", data);
   }
 
   getPatientByName(data) {
-    console.log( "getPatientByName::data", data );
+    //console.log( "getPatientByName::data", data );
     return http.post("/getPatientByName", {"name": data});
   }
 

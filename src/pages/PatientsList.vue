@@ -6,7 +6,6 @@
           <div class="col-md-8">
             <div class="input-group mb-3">
               <input type="text" class="form-control text-success" placeholder="Search by id or name"
-                     onKeyDown={this.onKeyDown}
                      v-model="id"/>
               <div class="input-group-append">
                 <button class="btn btn-success" type="button"
@@ -33,8 +32,10 @@
     </div>
 
 
+    <!--
     <button class="btn btn-success" @click="getSelectedRows()">Get Selected Rows</button>
-      <ag-grid-vue style="width: 100%; height: 500px;margin-top: 10px;"
+    -->
+      <ag-grid-vue style="width: 100%; height: 520px;margin-top: 10px;"
                    class="ag-theme-alpine-dark"
                    :enableCellTextSelection="true"
                    :columnDefs="patientColumnDefs"
@@ -144,13 +145,6 @@ export default {
     };
     this.fullWidthCellRenderer = 'FullWidthCellRenderer';
 
-    window.addEventListener('keydown', (e) => {
-      console.log( "Hello===");
-      if (e.key == 'Enter') {
-        this.showModal = !this.showModal;
-      }
-    });
-
   },
   methods: {
 
@@ -196,9 +190,9 @@ export default {
 
           for (let i = 0; i < entry.length; i++) {
             let e = entry[i];
-            console.log( e );
+            //console.log( e );
             if ( e.resource.name && e.resource.name.length > 0 ) {
-              console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
+              //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
               op.push(
                 {id: `${e.resource.id}`,
                   familyName: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
@@ -216,7 +210,7 @@ export default {
     },
 
     searchPatientByIDOrName() {
-      console.log( this.id );
+      //console.log( this.id );
       if ( this.id && this.id.trim().length > 0 )
         isNumber(this.id) ? this.searchPatientByID() : this.searchPatientByName();
       else
@@ -226,13 +220,13 @@ export default {
     searchPatientByID() {
       HapiService.getPatientWithID(this.id)
         .then(response => {
-          console.log(response);
+          //console.log(response);
           let e = response.data;
           let op = [];
 
-            console.log( e );
+            //console.log( e );
             if ( e.name && e.name.length > 0 ) {
-              console.log(e.name[0].family, e.name[0].given[0]);
+              //console.log(e.name[0].family, e.name[0].given[0]);
               op.push(
                 {id: `${e.id}`,
                   familyName: `${ capitalizeFirstLetter(e.name[0].family) }`,
@@ -253,15 +247,15 @@ export default {
     searchPatientByName() {
       FhirService.getPatientByName(this.id)
         .then(response => {
-          console.log(response);
+          //console.log(response);
           let entry = response.data.data.entry;
           let op = [];
 
           for (let i = 0; i < entry.length; i++) {
             let e = entry[i];
-            console.log( e );
+            //console.log( e );
             if ( e.resource.name && e.resource.name.length > 0 ) {
-              console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
+              //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
               op.push(
                 {id: `${e.resource.id}`,
                   familyName: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
@@ -331,4 +325,12 @@ window.isFullWidth = function isFullWidth(data) {
     display:inline-block;
   }
 
+  ::placeholder {
+    color: red;
+    opacity: 1; /* Firefox */
+  }
+
+  ::-ms-input-placeholder { /* Edge 12 -18 */
+    color: red;
+  }
 </style>
