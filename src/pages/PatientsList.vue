@@ -33,7 +33,7 @@
 
 
     <button class="btn btn-success" @click="getSelectedRows()">Get Selected Rows</button>
-      <ag-grid-vue style="width: 100%; height: 800px;margin-top: 10px;"
+      <ag-grid-vue style="width: 100%; height: 500px;margin-top: 10px;"
                    class="ag-theme-alpine-dark"
                    :columnDefs="patientColumnDefs"
                    :rowData="patientRowData"
@@ -92,30 +92,8 @@ export default {
       { field: 'birthday', sortable: true, filter: true, minWidth: 130, }
     ];
 
-    FhirService.getPatients()
-      .then(response => {
-        let entry = response.data.data.entry;
-        let op = [];
+    this.getAllPatients();
 
-        for (let i = 0; i < entry.length; i++) {
-          let e = entry[i];
-          console.log( e );
-          if ( e.resource.name && e.resource.name.length > 0 ) {
-            console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
-            op.push(
-              {id: `${e.resource.id}`,
-                familyName: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
-                givenName: `${ capitalizeFirstLetter(e.resource.name[0].given[0]) }`,
-                gender: `${ e.resource.gender ? capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
-                birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`
-              }
-            );
-          }
-        }
-        this.patientRowData = op;
-      }).catch(e => {
-        console.log(e);
-      });
   },
   data() {
     return {
@@ -178,10 +156,39 @@ export default {
           alert(`Selected nodes: ${selectedDataStringPresentation}`);
     },
 
+    getAllPatients() {
+      FhirService.getPatients()
+        .then(response => {
+          let entry = response.data.data.entry;
+          let op = [];
+
+          for (let i = 0; i < entry.length; i++) {
+            let e = entry[i];
+            console.log( e );
+            if ( e.resource.name && e.resource.name.length > 0 ) {
+              console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
+              op.push(
+                {id: `${e.resource.id}`,
+                  familyName: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
+                  givenName: `${ capitalizeFirstLetter(e.resource.name[0].given[0]) }`,
+                  gender: `${ e.resource.gender ? capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
+                  birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`
+                }
+              );
+            }
+          }
+          this.patientRowData = op;
+        }).catch(e => {
+        console.log(e);
+      });
+    },
 
     searchPatientByIDOrName() {
       console.log( this.id );
-      isNumber(this.id) ? this.searchPatientByID() : this.searchPatientByName();
+      if ( this.id && this.id.trim().length > 0 )
+        isNumber(this.id) ? this.searchPatientByID() : this.searchPatientByName();
+      else
+        this.getAllPatients();
     },
 
     searchPatientByID() {
