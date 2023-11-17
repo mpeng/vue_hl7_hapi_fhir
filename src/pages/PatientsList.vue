@@ -64,13 +64,20 @@
   </div>
 
     <button class="btn btn-icon" @click="getSelectedRows()">Get Selected Rows</button>
-    <ag-grid-vue style="height: 500px;margin-top: 10px;"
-                 class="ag-theme-alpine"
+
+    <ag-grid-vue style="width: 100%; height: 600px;margin-top: 10px;"
+                 class="ag-theme-alpine-dark"
                  :columnDefs="columnDefs"
                  :rowData="rowData"
+                 :defaultColDef="defaultColDef"
+                 :getRowHeight="getRowHeight"
+                 :isFullWidthRow="isFullWidthRow"
+                 :fullWidthCellRenderer="fullWidthCellRenderer"
                  :autoGroupColumnDef="autoGroupColumnDef"
                  @grid-ready="onGridReady">
     </ag-grid-vue>
+
+
 
   </div>
 </template>
@@ -78,7 +85,10 @@
 import { PaperTable } from "@/components";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+//import "ag-grid-community/dist/styles/ag-theme-balham-dark.css";
 import { AgGridVue } from "ag-grid-vue";
+import FullWidthCellRenderer from './fullWidthCellRendererVue.js';
+import '../assets/css/style.css';
 
 const tableColumns = ["Id", "Name", "Salary", "Country", "City"];
 const tableData = [
@@ -88,140 +98,8 @@ const tableData = [
     salary: "$36.738",
     country: "Niger",
     city: "Oud-Turnhout",
-  },
-  {
-    id: 2,
-    name: "Minerva Hooper",
-    salary: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas",
-  },
-  {
-    id: 3,
-    name: "Sage Rodriguez",
-    salary: "$56,142",
-    country: "Netherlands",
-    city: "Baileux",
-  },
-  {
-    id: 4,
-    name: "Philip Chaney",
-    salary: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park",
-  },
-  {
-    id: 5,
-    name: "Doris Greene",
-    salary: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten",
-  },
-  {
-    id: 6,
-    name: "Dakota Rice",
-    salary: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
-  },
-  {
-    id: 7,
-    name: "Minerva Hooper",
-    salary: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas",
-  },
-  {
-    id: 8,
-    name: "Sage Rodriguez",
-    salary: "$56,142",
-    country: "Netherlands",
-    city: "Baileux",
-  },
-  {
-    id: 9,
-    name: "Philip Chaney",
-    salary: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park",
-  },
-  {
-    id: 10,
-    name: "Doris Greene",
-    salary: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten",
-  },
-  {
-    id: 11,
-    name: "Dakota Rice",
-    salary: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
-  },
-  {
-    id: 12,
-    name: "Minerva Hooper",
-    salary: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas",
-  },
-  {
-    id: 13,
-    name: "Sage Rodriguez",
-    salary: "$56,142",
-    country: "Netherlands",
-    city: "Baileux",
-  },
-  {
-    id: 14,
-    name: "Philip Chaney",
-    salary: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park",
-  },
-  {
-    id: 15,
-    name: "Doris Greene",
-    salary: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten",
-  },
-  {
-    id: 16,
-    name: "Dakota Rice",
-    salary: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
-  },
-  {
-    id: 17,
-    name: "Minerva Hooper",
-    salary: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas",
-  },
-  {
-    id: 18,
-    name: "Sage Rodriguez",
-    salary: "$56,142",
-    country: "Netherlands",
-    city: "Baileux",
-  },
-  {
-    id: 19,
-    name: "Philip Chaney",
-    salary: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park",
-  },
-  {
-    id: 20,
-    name: "Doris Greene",
-    salary: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten",
-  },
+  }
+
 ];
 
 const patientColumns = ["Id", "FamilyName", "GivenName", "FullUrl"];
@@ -251,13 +129,6 @@ export default {
       { field: 'price', sortable: true, filter: true }
     ];
 
-    /*
-    this.rowData = [
-      {make: "Toyota", model: "Celica", price: 35000},
-      {make: "Ford", model: "Mondeo", price: 32000},
-      {make: "Porsche", model: "Boxster", price: 72000},
-    ];
-     */
 
     fetch('https://www.ag-grid.com/example-assets/row-data.json')
       .then(result => result.json())
@@ -286,8 +157,17 @@ export default {
       },
       columnDefs: null,
       rowData: null,
+      getRowHeight: null,
+      isFullWidthRow: null,
+      fullWidthCellRenderer: null,
       gridApi: null,
       columnApi: null,
+      defaultColDef: {
+        flex: 1,
+        sortable: true,
+        resizable: true,
+        filter: true,
+      },
       rowSelection: 'multiple',
       autoGroupColumnDef: {
         headerName: 'Model',
@@ -301,6 +181,18 @@ export default {
   },
   created() {
     this.rowSelection = 'multiple';
+    this.rowData = getData();
+    this.getRowHeight = (params) => {
+      // return 100px height for full width rows
+      if (isFullWidth(params.data)) {
+        return 100;
+      }
+    };
+    this.isFullWidthRow = (params) => {
+      return isFullWidth(params.rowNode.data);
+    };
+    this.fullWidthCellRenderer = 'FullWidthCellRenderer';
+
   },
   methods: {
 
@@ -403,6 +295,12 @@ export default {
     this.retrieveDocuments();
   }
 };
+
+window.isFullWidth = function isFullWidth(data) {
+  // return true when country is Peru, France or Italy
+  return true;
+};
+
 </script>
 <style>
   @import "~ag-grid-community/styles/ag-grid.css";
