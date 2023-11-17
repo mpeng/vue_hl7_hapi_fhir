@@ -5,7 +5,7 @@
         <input type="text" class="form-control" placeholder="Search by title"
           v-model="title"/>
         <div class="input-group-append">
-          <button class="btn btn-icon" type="button"
+          <button class="btn btn-success" type="button"
             @click="searchTitle"
           >
             Search
@@ -97,7 +97,7 @@ export default {
           console.log(e);
         });
     },
-    
+
     searchTitle() {
       DataService.findByTitle(this.title)
         .then(response => {

@@ -5,10 +5,10 @@
         <div class="submit-form">
           <div class="col-md-8">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Search by ID"
+              <input type="text" class="form-control text-success" placeholder="Search by ID"
                      v-model="id"/>
               <div class="input-group-append">
-                <button class="btn btn-icon" type="button"
+                <button class="btn btn-success" type="button"
                         @click="searchID"
                 >
                   Search
@@ -32,7 +32,7 @@
     </div>
 
 
-    <button class="btn btn-icon" @click="getSelectedRows()">Get Selected Rows</button>
+    <button class="btn btn-success" @click="getSelectedRows()">Get Selected Rows</button>
       <ag-grid-vue style="width: 100%; height: 800px;margin-top: 10px;"
                    class="ag-theme-alpine-dark"
                    :columnDefs="patientColumnDefs"
@@ -82,6 +82,7 @@ export default {
 
         for (let i = 0; i < entry.length; i++) {
           let e = entry[i];
+          console.log( e );
           if ( e.resource.name && e.resource.name.length > 0 ) {
             console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
             op.push(
