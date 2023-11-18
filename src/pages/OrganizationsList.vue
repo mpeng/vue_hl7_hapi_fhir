@@ -164,6 +164,7 @@ const tableData = [
 ];
 
 export default {
+  name: "OrganizationList",
   components: {
     PaperTable,
   },
