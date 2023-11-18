@@ -6,10 +6,11 @@
         <sidebar-link to="/dashboard" name="Dashboard" icon="ti-panel" />
         <sidebar-link to="/stats" name="User Profile" icon="ti-user" />
         -->
+
         <sidebar-link
-          to="/patients-list"
-          name="Patients"
-          icon="ti-user"
+          to="/patient-Tab-View"
+          name="Patient Tab View"
+          icon="ti-layout-tab-window"
         />
 
         <sidebar-link
@@ -30,11 +31,6 @@
           icon="ti-upload"
         />
 
-        <sidebar-link
-          to="/patient-Tab-View"
-          name="Patient Tab View"
-          icon="ti-layout-tab-window"
-        />
         <!--
         <sidebar-link to="/typography" name="Typography" icon="ti-text" />
         <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2" />
