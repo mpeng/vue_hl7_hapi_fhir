@@ -23,7 +23,8 @@
     "vue-clickaway": "2.2.2",
     "vue-notifyjs": "0.3.0",
     "vue-router": "3.0.1",
-    "vue-tabs-chrome": "^0.10.0"
+    "vue-tabs-chrome": "^0.10.0",
+    "vuetify": "^2.7.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.12.1",

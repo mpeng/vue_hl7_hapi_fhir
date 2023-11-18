@@ -21,7 +21,7 @@
   import PatientList from './PatientsList.vue'
 
   export default {
-    name: "patient-Tab-View",
+    name: "patient-Tab-View-Chrome",
     components: {
       VueTabsChrome,
       PatientList
@@ -33,7 +33,8 @@
           {
             label: 'Health Information',
             key: 'tab1',
-            closable: false
+            closable: false,
+            favicon: "ti-files"
           },
           {
             label: 'Grants & Funding',
@@ -69,22 +70,5 @@
 <style>
   .tabStyle {
     margin-top: 30px;
-  }
-
-  .vue-tabs-chrome {
-    padding-top: 10px;
-    background-color: #f8f8f8;
-    position: relative;
-    color: #000;
-    font-family: 'themify';
-    font-size: 15px;
-    text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-
-  .vue-tabs-chrome .tabs-footer {
-    height: 0px;
-    background-color: #dee2e6;
   }
 </style>
