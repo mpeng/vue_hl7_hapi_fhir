@@ -31,6 +31,12 @@
           icon="ti-upload"
         />
 
+        <sidebar-link
+          to="/practitioner"
+          name="Practitioner"
+          icon=" ti-id-badge"
+        />
+
         <!--
         <sidebar-link to="/typography" name="Typography" icon="ti-text" />
         <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2" />

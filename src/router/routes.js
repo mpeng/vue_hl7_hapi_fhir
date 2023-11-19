@@ -13,6 +13,7 @@ import TableList from "@/pages/TableList.vue";
 import PatientsList from "@/pages/PatientsList.vue";
 import OrganizationsList from "@/pages/OrganizationsList.vue";
 import PatientTabView from "@/pages/PatientTabView.vue";
+import Practitioner from "@/pages/Practitioner.vue";
 
 const routes = [
   {
@@ -59,6 +60,11 @@ const routes = [
         path: "patient-Tab-View",
         name: "Patient Tab View",
         component: PatientTabView,
+      },
+      {
+        path: "Practitioner",
+        name: "Practitioner",
+        component: Practitioner,
       },
       {
         path: "organizations-list",

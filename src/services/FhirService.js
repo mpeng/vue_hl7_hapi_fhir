@@ -6,6 +6,10 @@ class FhirService {
     return http.get("/getPatients");
   }
 
+  getPatientsByBirthdayPage(offset) {
+    return http.get("/getPatientSortedByBirthday?offset=" + offset);
+  }
+
   getListByResourceType(data) {
     //console.log( "getListByResourceType::data = ", data );
     return http.post("/getListByResourceType", data);
