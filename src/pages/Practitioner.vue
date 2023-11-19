@@ -48,7 +48,7 @@
     name: "Practitioner",
     data() {
       return {
-        perPage: 10,
+        perPage: 12,
         currentPage: 1,
         items: [
 
