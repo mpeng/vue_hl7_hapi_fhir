@@ -64,7 +64,7 @@
     methods: {
       getAllPatients() {
         console.log("getPatientsPagination is called");
-        FhirService.getPatientsPagination(20, 0)
+        FhirService.getPatientsPagination(100, 0)
         //FhirService.getPatientsByBirthdayPageCount(200, 0)
           .then(response => {
             let entry = response.data.data.entry;
@@ -80,7 +80,11 @@
                     last_name: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
                     first_name: `${ e.resource.name[0].given ? capitalizeFirstLetter(e.resource.name[0].given[0]) : "N.A." }`,
                     gender: `${ e.resource.gender ? capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
-                    birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`
+                    birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`,
+                    address: `${ e.resource.address ?
+                      ( e.resource.address[0].line ? e.resource.address[0].line[0] + " " : "" ) + e.resource.address[0].city + " " + e.resource.address[0].state :
+                      "N.A." }`,
+                    phone: `${ e.resource.telecom ? e.resource.telecom[0].value : "N.A." }`
                   }
                 );
               }
@@ -105,8 +109,10 @@
   }
 
   .pageIndex {
+    margin-top: 00px;
     color: green;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bolder;
+    font-family: emoji;
   }
 </style>
