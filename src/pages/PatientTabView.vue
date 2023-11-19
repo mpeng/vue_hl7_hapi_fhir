@@ -10,6 +10,7 @@
       </div>
       <div v-else-if="this.whichTab == 'tab2'">
         <h6 class="space">{{this.tabLabel}}</h6>
+        <Practitioner />
       </div>
       <div v-else-if="this.whichTab == 'tab3'">
         <h6 class="space">{{this.tabLabel}}</h6>
@@ -34,6 +35,7 @@
   import Vue from 'vue';
   import VueTabsChrome from 'vue-tabs-chrome';
   import PatientList from './PatientsList.vue';
+  import Practitioner from './Practitioner.vue';
   import OrganizationList from './OrganizationsList.vue';
 
   import { ref } from 'vue'
@@ -43,6 +45,7 @@
     components: {
       VueTabsChrome,
       PatientList,
+      Practitioner,
       OrganizationList
     },
     data() {
@@ -126,67 +129,14 @@
     },
 
     methods: {
-      addTab () {
-        let item = 'tab' + Date.now()
-        let newTabs = [
-          {
-            label: 'New Tab',
-            key: item
-          }
-        ]
-        this.$refs.tab.addTab(...newTabs)
-        this.tab = item
-        this.location = ''
-      },
-      removeTab () {
-        this.$refs.tab.removeTab(this.tab)
-      },
+
       handleClick (e, tab, i) {
         console.log(e, tab, i)
       },
-      handleSearch () {
-        let { location } = this
-        let label = capitalize(location.split('.').slice(-2)[0])
-        let favicon = ''
-        if (location.includes('.')) {
-          if (!location.startsWith('http://') && !location.startsWith('https://')) {
-            location = 'https://' + location
-          }
-        } else {
-          location = `https://www.bing.com/search?q=${encodeURIComponent(location)}`
-          label = 'Bing'
-          favicon = 'https://bing.com/favicon.ico'
-        }
 
-        if (!favicon) {
-          favicon = location + '/favicon.ico'
-        }
-
-        let tab = this.getCurrTab()
-        tab.label = label
-        tab.url = location
-        tab.favicon = favicon
-
-        // this.tab = key
-        this.$refs.location.blur()
-
-        this.tabs.splice()
-      },
       getCurrTab () {
         return this.tabs.find(item => item.key === this.tab)
       },
-      handleNavClick (msg) {
-        alert(msg)
-      },
-      handleCollection () {
-        alert('😆')
-      },
-      handleMore () {
-        alert('🤗')
-      },
-      handleFullscreen () {
-        this.$refs.content.requestFullscreen()
-      }
     }
   }
 </script>
