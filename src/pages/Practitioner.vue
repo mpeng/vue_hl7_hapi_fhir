@@ -19,7 +19,7 @@
       size="sm"
     ></b-pagination>
 
-    <label class="mt-3">Current Page: {{ currentPage }}</label>
+      <label class="mt-3">Page: <strong class="pageIndex">{{ currentPage }}</strong></label>
     </div>
 
   </div>
@@ -102,5 +102,11 @@
   .same_line_even_space {
     display: flex;
     justify-content: space-between;
+  }
+
+  .pageIndex {
+    color: green;
+    font-size: 14px;
+    font-weight: bolder;
   }
 </style>

@@ -34,13 +34,13 @@
         <sidebar-link
           to="/practitioner"
           name="Practitioner"
-          icon=" ti-id-badge"
+          icon="ti-id-badge"
         />
 
         <sidebar-link
           to="/BootstrapTable"
           name="BootstrapTable"
-          icon=" ti-id-badge"
+          icon="ti-gallery"
         />
 
       </template>
