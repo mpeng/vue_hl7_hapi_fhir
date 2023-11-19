@@ -1,14 +1,5 @@
 <template>
   <div class="overflow-auto">
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="rows"
-      :per-page="perPage"
-      aria-controls="my-table"
-      size="sm"
-    ></b-pagination>
-
-    <p class="mt-3">Current Page: {{ currentPage }}</p>
 
     <b-table
       striped hover
@@ -18,6 +9,18 @@
       :current-page="currentPage"
       small
     ></b-table>
+
+    <div class="same_line_even_space">
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="my-table"
+      size="sm"
+    ></b-pagination>
+
+    <label class="mt-3">Current Page: {{ currentPage }}</label>
+    </div>
 
   </div>
 </template>
@@ -94,3 +97,10 @@
     },
   }
 </script>
+
+<style>
+  .same_line_even_space {
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
