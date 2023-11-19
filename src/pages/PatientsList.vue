@@ -198,7 +198,8 @@ export default {
 
     getAllPatients() {
       //FhirService.getPatients()
-      FhirService.getPatientsByBirthdayPage()
+      //FhirService.getPatientsByBirthdayPage()
+      FhirService.getPatientsPagination(20, 0)
         .then(response => {
           let entry = response.data.data.entry;
           let op = [];
@@ -211,7 +212,7 @@ export default {
               op.push(
                 {id: `${e.resource.id}`,
                   familyName: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
-                  givenName: `${ capitalizeFirstLetter(e.resource.name[0].given[0]) }`,
+                  givenName: `${ e.resource.name[0].given ? capitalizeFirstLetter(e.resource.name[0].given[0]) : "" }`,
                   gender: `${ e.resource.gender ? capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
                   birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`
                 }

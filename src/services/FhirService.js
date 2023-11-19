@@ -7,7 +7,18 @@ class FhirService {
   }
 
   getPatientsByBirthdayPage(offset) {
+    console.log( "getPatientsByBirthdayPage: offset=" + offset);
     return http.get("/getPatientSortedByBirthday?offset=" + offset);
+  }
+
+  getPatientsPagination(count, offset) {
+    console.log( "getPatientsPagination: count=" + count + ", offset=" + offset);
+    return http.get("/getPatientByPagesCount?count=" + count + "&offset=" + offset);
+  }
+
+  getPatientsByBirthdayPageCount(count, offset) {
+    console.log( "getPatientsByBirthdayPageCount: count=" + count + ", offset=" + offset);
+    return http.get("/getPatientSortedByBirthdayCount?count=" + count + "&offset=" + offset);
   }
 
   getListByResourceType(data) {
