@@ -37,6 +37,12 @@
           icon=" ti-id-badge"
         />
 
+        <sidebar-link
+          to="/BootstrapTable"
+          name="BootstrapTable"
+          icon=" ti-id-badge"
+        />
+
       </template>
 
     </side-bar>

@@ -6,11 +6,11 @@
     <div class="tabStyle">
       <div v-if="this.whichTab == 'tab1'">
         <h6 class="space">{{this.tabLabel}}</h6>
-        <PatientList />
+        <Practitioner />
       </div>
       <div v-else-if="this.whichTab == 'tab2'">
         <h6 class="space">{{this.tabLabel}}</h6>
-        <Practitioner />
+        <PatientList />
       </div>
       <div v-else-if="this.whichTab == 'tab3'">
         <h6 class="space">{{this.tabLabel}}</h6>
@@ -166,5 +166,6 @@
   .space {
     margin-left: 20px;
     margin-bottom: 20px;
+    font-size: 12px;
   }
 </style>

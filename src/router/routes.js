@@ -14,6 +14,7 @@ import PatientsList from "@/pages/PatientsList.vue";
 import OrganizationsList from "@/pages/OrganizationsList.vue";
 import PatientTabView from "@/pages/PatientTabView.vue";
 import Practitioner from "@/pages/Practitioner.vue";
+import BootstrapTable from "@/pages/BootstrapTable.vue";
 
 const routes = [
   {
@@ -65,6 +66,12 @@ const routes = [
         path: "Practitioner",
         name: "Practitioner",
         component: Practitioner,
+      },
+
+      {
+        path: "BootstrapTable",
+        name: "BootstrapTable",
+        component: BootstrapTable,
       },
       {
         path: "organizations-list",

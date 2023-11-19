@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <h4>Documents List</h4>
+      <p />
 
       <ul class="list-group">
         <li class="list-group-item"
@@ -33,15 +33,15 @@
     </div>
     <div class="col-md-6">
       <div v-if="currentDocument">
-        <h4>Document</h4>
+        <p />
         <div>
-          <label><strong>Title:</strong></label> {{ currentDocument.title }}
+          <label><strong>Title: </strong>{{ currentDocument.title }}</label>
         </div>
         <div>
-          <label><strong>Description:</strong></label> {{ currentDocument.description }}
+          <label><strong>Description: </strong>{{ currentDocument.description }}</label>
         </div>
         <div>
-          <label><strong>Status:</strong></label> {{ currentDocument.published ? "Published" : "Pending" }}
+          <label><strong>Status: </strong> {{ currentDocument.published ? "Published" : "Pending" }}</label>
         </div>
 
         <router-link :to="'/documents/' + currentDocument.id" class="btn btn-info">Edit</router-link>

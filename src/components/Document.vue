@@ -1,6 +1,6 @@
 <template>
   <div v-if="currentDocument" class="edit-form">
-    <h4>Document</h4>
+    <h6>Document</h6>
     <form>
       <div class="form-group">
         <label for="title">Title</label>

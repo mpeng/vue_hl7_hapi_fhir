@@ -1,0 +1,25 @@
+.table > thead > tr > th {
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+.table > tbody > tr {
+  font-family: Arial;
+  font-size: 13px;
+  font-weight: normal;
+}
+.mt-3 {
+  font-size: 12px;
+}
+.list-group-item {
+ font-size: 12px;
+}
+
+label {
+  font-size: 13px;
+}
+
+// Then import Bootstrap and BootstrapVue SCSS files (order is important)
+@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../../node_modules/bootstrap-vue/src/index.scss';

@@ -11,24 +11,19 @@
     <p class="mt-3">Current Page: {{ currentPage }}</p>
 
     <b-table
+      striped hover
       id="my-table"
       :items="items"
       :per-page="perPage"
       :current-page="currentPage"
       small
     ></b-table>
+
   </div>
 </template>
 
 <script>
   import { ref } from 'vue'
-  import "ag-grid-community/styles/ag-grid.css";
-  import "ag-grid-community/styles/ag-theme-alpine.css";
-  import { AgGridVue } from "ag-grid-vue";
-  import FullWidthCellRenderer from './fullWidthCellRendererVue.js';
-  import '../assets/css/style.css';
-  import DataService from "../services/DataService";
-  import HapiService from "../services/HapiService";
   import FhirService from "../services/FhirService";
   import moment from "moment";
 
@@ -66,7 +61,7 @@
     methods: {
       getAllPatients() {
         console.log("getPatientsPagination is called");
-        FhirService.getPatientsPagination(100, 0)
+        FhirService.getPatientsPagination(20, 0)
         //FhirService.getPatientsByBirthdayPageCount(200, 0)
           .then(response => {
             let entry = response.data.data.entry;

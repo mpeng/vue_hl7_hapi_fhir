@@ -336,4 +336,8 @@ window.isFullWidth = function isFullWidth(data) {
   .justify-content-end  {
     margin-top: 10px;
   }
+
+  .wider {
+
+  }
 </style>
