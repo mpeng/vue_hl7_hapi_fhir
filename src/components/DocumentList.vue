@@ -1,6 +1,24 @@
 <template>
+  <div class="overflow-auto">
+  <div class="content">
+    <vue-tabs-chrome  ref="tab" :minHiddenWidth="120" v-model="tab" :tabs="tabs"  @contextnav="handleClick" />
 
+    <div class="tabStyle">
+      <div v-if="this.whichTab == 'tab1'">
+        <h6 class="space">{{this.tabLabel}}</h6>
+      </div>
+      <div v-else-if="this.whichTab == 'tab2'">
+        <h6 class="space">{{this.tabLabel}}</h6>
+      </div>
+      <div v-else-if="this.whichTab == 'tab3'">
+        <h6 class="space">{{this.tabLabel}}</h6>
+      </div>
+      <div v-else-if="this.whichTab == 'tab4'">
+        <h6 class="space">{{this.tabLabel}}</h6>
+      </div>
 
+    </div>
+  </div>
 
   <div class="submit-form">
 
@@ -53,11 +71,13 @@
 
     </div>
   </div>
+  </div>
 
 </template>
 
 <script>
 import DataService from "../services/DataService";
+import { ref } from 'vue';
 
 export default {
   name: "documents-list",
@@ -90,20 +110,11 @@ export default {
           label: 'Research & Training',
           key: 'tab4',
           closable: false
-        },
-        {
-          label: 'Institutes',
-          key: 'tab5',
-          closable: false
-        },
-        {
-          label: 'About Us',
-          key: 'tab6',
-          closable: false
         }
       ]
     };
   },
+
   watch: {
     tab () {
       console.log( "tab - Hello" );

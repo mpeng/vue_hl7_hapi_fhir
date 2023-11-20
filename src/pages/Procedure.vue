@@ -93,16 +93,6 @@
             label: 'Research & Training',
             key: 'tab4',
             closable: false
-          },
-          {
-            label: 'Institutes',
-            key: 'tab5',
-            closable: false
-          },
-          {
-            label: 'About Us',
-            key: 'tab6',
-            closable: false
           }
         ]
       }
