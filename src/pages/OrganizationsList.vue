@@ -1,184 +1,119 @@
 <template>
-  <div class="row">
-    <div class="col-12">
-      <card class="card-plain">
-        <div class="table-full-width table-responsive">
-          <paper-table
-            type="hover"
-            :title="table2.title"
-            :sub-title="table2.subTitle"
-            :data="table2.data"
-            :columns="table2.columns"
-          >
-          </paper-table>
-        </div>
-      </card>
+  <div class="overflow-auto">
+
+    <b-table
+      striped hover
+      id="my-table"
+      :items="items"
+      :per-page="perPage"
+      :current-page="currentPage"
+      small
+    ></b-table>
+
+    <div class="same_line_even_space">
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="my-table"
+        size="sm"
+      ></b-pagination>
+
+      <label class="mt-3">Page: <strong class="pageIndex">{{ currentPage }}</strong></label>
     </div>
+
   </div>
 </template>
+
 <script>
-import { PaperTable } from "@/components";
-const tableColumns = ["Id", "Organization", "Revenue", "Country", "City"];
-const tableData = [
-  {
-    id: 1,
-    organization: "Dakota Rice",
-    revenue: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
-  },
-  {
-    id: 2,
-    organization: "Minerva Hooper",
-    revenue: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas",
-  },
-  {
-    id: 3,
-    organization: "Sage Rodriguez",
-    revenue: "$56,142",
-    country: "Netherlands",
-    city: "Baileux",
-  },
-  {
-    id: 4,
-    organization: "Philip Chaney",
-    revenue: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park",
-  },
-  {
-    id: 5,
-    organization: "Doris Greene",
-    revenue: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten",
-  },
-  {
-    id: 6,
-    organization: "Dakota Rice",
-    revenue: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
-  },
-  {
-    id: 7,
-    organization: "Minerva Hooper",
-    revenue: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas",
-  },
-  {
-    id: 8,
-    organization: "Sage Rodriguez",
-    revenue: "$56,142",
-    country: "Netherlands",
-    city: "Baileux",
-  },
-  {
-    id: 9,
-    organization: "Philip Chaney",
-    revenue: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park",
-  },
-  {
-    id: 10,
-    organization: "Doris Greene",
-    revenue: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten",
-  },
+  import { ref } from 'vue'
+  import FhirService from "../services/FhirService";
+  import moment from "moment";
 
-  {
-    id: 11,
-    organization: "Dakota Rice",
-    revenue: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
-  },
-  {
-    id: 12,
-    organization: "Minerva Hooper",
-    revenue: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas",
-  },
-  {
-    id: 13,
-    organization: "Sage Rodriguez",
-    revenue: "$56,142",
-    country: "Netherlands",
-    city: "Baileux",
-  },
-  {
-    id: 14,
-    organization: "Philip Chaney",
-    revenue: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park",
-  },
-  {
-    id: 15,
-    organization: "Doris Greene",
-    revenue: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten",
-  },
-  {
-    id: 16,
-    organization: "Dakota Rice",
-    revenue: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
-  },
-  {
-    id: 17,
-    organization: "Minerva Hooper",
-    revenue: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas",
-  },
-  {
-    id: 18,
-    organization: "Sage Rodriguez",
-    revenue: "$56,142",
-    country: "Netherlands",
-    city: "Baileux",
-  },
-  {
-    id: 19,
-    organization: "Philip Chaney",
-    revenue: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park",
-  },
-  {
-    id: 20,
-    organization: "Doris Greene",
-    revenue: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten",
-  },
-];
+  const FORMAT = "MMM D, yyyy";
 
-export default {
-  name: "OrganizationList",
-  components: {
-    PaperTable,
-  },
-  data() {
-    return {
+  function   capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
-      table2: {
-        title: "Table on Plain Background",
-        subTitle: "Here is a subtitle for this table",
-        columns: [...tableColumns],
-        data: [...tableData],
+  function isNumber(string){
+    if(typeof string === "string"){
+      return(!isNaN(string));
+    }
+    return false;
+  };
+
+
+  export default {
+    name: "Practitioner",
+    data() {
+      return {
+        perPage: 12,
+        currentPage: 1,
+        items: [
+
+        ]
+      }
+    },
+    computed: {
+      rows() {
+        return this.items.length
+      }
+    },
+
+    methods: {
+      getAllPatients() {
+        const resourceType = JSON.stringify({ "resourceType": "Organization" });
+        console.log("getPatientsPagination is called with ", resourceType);
+        FhirService.getListByResourceType(resourceType)
+          .then(response => {
+            let entry = response.data.data.entry;
+            let op = [];
+
+            for (let i = 0; i < entry.length; i++) {
+              let e = entry[i];
+              console.log( e );
+              if ( e.resource.name  ) {
+                //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
+                op.push(
+                  {id: `${e.resource.id}`,
+                    name: `${ capitalizeFirstLetter(e.resource.name) }`,
+                    first_name: `${ e.resource.name[0].given ? capitalizeFirstLetter(e.resource.name[0].given[0]) : "N.A." }`,
+                    address: `${ e.resource.address ?
+                      ( e.resource.address[0].line ? e.resource.address[0].line[0] + " " : "" ) + e.resource.address[0].city + " " + e.resource.address[0].state
+                      + " " + e.resource.address[0].postalCode : "N.A." }`,
+                    phone: `${ e.resource.telecom ? e.resource.telecom[0].value : "N.A." }`,
+                    fax: `${ e.resource.telecom ? e.resource.telecom[1].value : "N.A." }`,
+                    contact: `${ e.resource.contact ? e.resource.contact[0].name.family +
+                      (e.resource.contact[0].name.given ? " " + e.resource.contact[0].name.given[0] : "" ) : "N.A." }`
+                  }
+                );
+              }
+            }
+            this.items = op;
+          }).catch(e => {
+          console.log(e);
+          this.items = [];
+        });
       },
-    };
-  },
-};
+    },
+    mounted() {
+      this.getAllPatients();
+    },
+  }
 </script>
-<style></style>
+
+<style>
+  .same_line_even_space {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pageIndex {
+    margin-top: 00px;
+    color: green;
+    font-size: 16px;
+    font-weight: bolder;
+    font-family: emoji;
+  }
+</style>
