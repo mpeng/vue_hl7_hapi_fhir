@@ -23,7 +23,6 @@
       </div>
       <div v-else>
         <h6 class="space">{{this.tabLabel}}</h6>
-        <OrganizationList />
       </div>
     </div>
   </div>

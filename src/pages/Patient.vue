@@ -65,7 +65,7 @@
 
         const resourceType = JSON.stringify({
           "resourceType": "Patient",
-          "count": 60,
+          "count": 50,
           "offset": 0
         });
         console.log("getPatientsPagination is called with ", resourceType);
