@@ -61,12 +61,6 @@
           icon="ti-upload"
         />
 
-        <sidebar-link
-          to="/BootstrapTable"
-          name="BootstrapTable"
-          icon="ti-gallery"
-        />
-
       </template>
 
     </side-bar>

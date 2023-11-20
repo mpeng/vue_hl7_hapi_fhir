@@ -63,9 +63,13 @@
 
     methods: {
       getAllPatients() {
-        const resourceType = JSON.stringify({ "resourceType": "Organization" });
+        const resourceType = JSON.stringify({
+          "resourceType": "Organization",
+          "count": 100,
+          "offset": 0
+        });
         console.log("getPatientsPagination is called with ", resourceType);
-        FhirService.getListByResourceType(resourceType)
+        FhirService.getListByResourceTypePage(resourceType)
           .then(response => {
             let entry = response.data.data.entry;
             let op = [];
@@ -83,7 +87,7 @@
                       ( e.resource.address[0].line ? e.resource.address[0].line[0] + " " : "" ) + e.resource.address[0].city + " " + e.resource.address[0].state
                       + " " + e.resource.address[0].postalCode : "N.A." }`,
                     phone: `${ e.resource.telecom ? e.resource.telecom[0].value : "N.A." }`,
-                    fax: `${ e.resource.telecom ? e.resource.telecom[1].value : "N.A." }`,
+                    fax: `${ e.resource.telecom && e.resource.telecom.length > 1 ? e.resource.telecom[1].value : "N.A." }`,
                     contact: `${ e.resource.contact ? e.resource.contact[0].name.family +
                       (e.resource.contact[0].name.given ? " " + e.resource.contact[0].name.given[0] : "" ) : "N.A." }`
                   }

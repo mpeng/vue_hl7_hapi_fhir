@@ -26,6 +26,12 @@ class FhirService {
     return http.post("/getListByResourceType", data);
   }
 
+  // getListByResourceTypePage
+  getListByResourceTypePage(data) {
+    //console.log( "getListByResourceTypePage::data = ", data );
+    return http.post("/getListByResourceTypePage", data);
+  }
+
   getPatientByName(data) {
     //console.log( "getPatientByName::data", data );
     return http.post("/getPatientByName", {"name": data});

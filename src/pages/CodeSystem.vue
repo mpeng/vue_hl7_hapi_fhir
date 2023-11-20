@@ -63,9 +63,13 @@
 
     methods: {
       getAllPatients() {
-        const resourceType = JSON.stringify({ "resourceType": "CodeSystem" });
+        const resourceType = JSON.stringify({
+          "resourceType": "CodeSystem",
+          "count": 100,
+          "offset": 0
+        });
         console.log("getPatientsPagination is called with ", resourceType);
-        FhirService.getListByResourceType(resourceType)
+        FhirService.getListByResourceTypePage(resourceType)
           .then(response => {
             let entry = response.data.data.entry;
             let op = [];

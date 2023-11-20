@@ -63,9 +63,13 @@
 
     methods: {
       getAllPatients() {
-        const resourceType = JSON.stringify({ "resourceType": "Observation" });
+        const resourceType = JSON.stringify({
+          "resourceType": "Observation",
+          "count": 100,
+          "offset": 0
+        });
         console.log("getPatientsPagination is called with ", resourceType);
-        FhirService.getListByResourceType(resourceType)
+        FhirService.getListByResourceTypePage(resourceType)
           .then(response => {
             let entry = response.data.data.entry;
             let op = [];
@@ -73,19 +77,19 @@
             for (let i = 0; i < entry.length; i++) {
               let e = entry[i];
               console.log( e );
-              if ( e.resource.name  ) {
+              if ( e.resource.id  ) {
                 //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
                 op.push(
-                  {id: `${e.resource.id}`,
-                    name: `${ capitalizeFirstLetter(e.resource.name) }`,
-                    first_name: `${ e.resource.name[0].given ? capitalizeFirstLetter(e.resource.name[0].given[0]) : "N.A." }`,
-                    address: `${ e.resource.address ?
-                      ( e.resource.address[0].line ? e.resource.address[0].line[0] + " " : "" ) + e.resource.address[0].city + " " + e.resource.address[0].state
-                      + " " + e.resource.address[0].postalCode : "N.A." }`,
-                    phone: `${ e.resource.telecom ? e.resource.telecom[0].value : "N.A." }`,
-                    fax: `${ e.resource.telecom ? e.resource.telecom[1].value : "N.A." }`,
-                    contact: `${ e.resource.contact ? e.resource.contact[0].name.family +
-                      (e.resource.contact[0].name.given ? " " + e.resource.contact[0].name.given[0] : "" ) : "N.A." }`
+                  { id: `${e.resource.id}`,
+                    status: `${e.resource.status}`,
+                    categorySystem: `${e.resource.category ? e.resource.category[0].coding[0].system : ""}`,
+                    categoryCode: `${e.resource.category ? e.resource.category[0].coding[0].code : ""}`,
+                    categoryDisplay: `${e.resource.category ? e.resource.category[0].coding[0].display : ""}`,
+                    codeSystem: `${e.resource.code && e.resource.code.length > 0 ? e.resource.code.coding[0].system : ""}`,
+                    codeCode: `${e.resource.code && e.resource.code.length > 0 ? e.resource.code.coding[0].code : ""}`,
+                    codeDisplay: `${e.resource.code && e.resource.code.length > 0 ? e.resource.code.coding[0].display : ""}`,
+                    codeText: `${e.resource.code && e.resource.code.length > 0 ? e.resource.code.text : ""}`,
+
                   }
                 );
               }
