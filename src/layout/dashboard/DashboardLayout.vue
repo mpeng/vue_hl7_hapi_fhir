@@ -22,7 +22,7 @@
         <sidebar-link
           to="/codeSystem"
           name="CodeSystem"
-          icon="ti-shortcode"
+          icon="ti-write"
         />
 
         <sidebar-link
@@ -34,7 +34,7 @@
         <sidebar-link
           to="/procedure"
           name="Procedure"
-          icon=" ti-bell"
+          icon="ti-layers-alt"
         />
 
         <sidebar-link
@@ -46,7 +46,7 @@
         <sidebar-link
           to="/practitioner"
           name="Practitioner"
-          icon="ti-stamp"
+          icon="ti-user"
         />
 
         <sidebar-link
@@ -58,7 +58,7 @@
         <sidebar-link
           to="/add"
           name="Add a document"
-          icon="ti-upload"
+          icon="ti-jsfiddle"
         />
 
       </template>
@@ -79,6 +79,11 @@ import TopNavbar from "./TopNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "./MobileMenu";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUserSecret);
+
 export default {
   components: {
     TopNavbar,

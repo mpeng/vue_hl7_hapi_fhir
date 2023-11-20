@@ -1,6 +1,8 @@
 <template>
   <div class="overflow-auto">
+
   <div class="content">
+
     <vue-tabs-chrome  ref="tab" :minHiddenWidth="120" v-model="tab" :tabs="tabs"  @contextnav="handleClick" />
 
     <div class="tabStyle">
