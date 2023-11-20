@@ -14,6 +14,10 @@ import PatientsList from "@/pages/PatientsList.vue";
 import OrganizationsList from "@/pages/OrganizationsList.vue";
 import PatientTabView from "@/pages/PatientTabView.vue";
 import Practitioner from "@/pages/Practitioner.vue";
+import CodeSystem from "@/pages/CodeSystem.vue";
+import Observation from "@/pages/Observation.vue";
+import Procedure from "@/pages/Procedure.vue";
+import ExplanationOfBenefit from "@/pages/ExplanationOfBenefit.vue";
 import BootstrapTable from "@/pages/BootstrapTable.vue";
 
 const routes = [
@@ -66,6 +70,30 @@ const routes = [
         path: "Practitioner",
         name: "Practitioner",
         component: Practitioner,
+      },
+
+      {
+        path: "ExplanationOfBenefit",
+        name: "ExplanationOfBenefit",
+        component: ExplanationOfBenefit,
+      },
+
+      {
+        path: "CodeSystem",
+        name: "CodeSystem",
+        component: CodeSystem,
+      },
+
+      {
+        path: "Procedure",
+        name: "Procedure",
+        component: Procedure,
+      },
+
+      {
+        path: "Observation",
+        name: "Observation",
+        component: Observation,
       },
 
       {
