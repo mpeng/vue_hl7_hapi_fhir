@@ -32,12 +32,15 @@
 
   const FORMAT = "MMM D, yyyy";
 
+  /*
   function   capitalizeFirstLetter(string) {
     if ( string && string.length > 1 )
       return string.charAt(0).toUpperCase() + string.slice(1);
     else
       return "";
   };
+
+   */
 
   function isNumber(string){
     if(typeof string === "string"){
@@ -65,7 +68,11 @@
     },
 
     methods: {
+
       getAllPatients() {
+        console.log( "==================Calling mixin===============" );
+        this.myMethod();
+
         const resourceType = JSON.stringify({
           "resourceType": "Patient",
           "count": 100,
