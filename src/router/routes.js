@@ -14,6 +14,7 @@ import PatientsList from "@/pages/PatientsList.vue";
 import OrganizationsList from "@/pages/OrganizationsList.vue";
 import PatientTabView from "@/pages/PatientTabView.vue";
 import Practitioner from "@/pages/Practitioner.vue";
+import Patient from "@/pages/Patient.vue";
 import CodeSystem from "@/pages/CodeSystem.vue";
 import Observation from "@/pages/Observation.vue";
 import Procedure from "@/pages/Procedure.vue";
@@ -70,6 +71,12 @@ const routes = [
         path: "Practitioner",
         name: "Practitioner",
         component: Practitioner,
+      },
+
+      {
+        path: "Patient",
+        name: "Patient",
+        component: Patient,
       },
 
       {

@@ -9,7 +9,7 @@
 
         <sidebar-link
           to="/patient-Tab-View"
-          name="Patient Tab View"
+          name="Patient"
           icon="ti-layout-tab-window"
         />
 

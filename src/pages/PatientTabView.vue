@@ -6,7 +6,7 @@
     <div class="tabStyle">
       <div v-if="this.whichTab == 'tab1'">
         <h6 class="space">{{this.tabLabel}}</h6>
-        <Practitioner />
+        <Patient />
       </div>
       <div v-else-if="this.whichTab == 'tab2'">
         <h6 class="space">{{this.tabLabel}}</h6>
@@ -36,6 +36,7 @@
   import VueTabsChrome from 'vue-tabs-chrome';
   import PatientList from './PatientsList.vue';
   import Practitioner from './Practitioner.vue';
+  import Patient from './Patient.vue';
   import OrganizationList from './OrganizationsList.vue';
 
   import { ref } from 'vue'
@@ -46,6 +47,7 @@
       VueTabsChrome,
       PatientList,
       Practitioner,
+      Patient,
       OrganizationList
     },
     data() {

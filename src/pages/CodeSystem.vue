@@ -108,12 +108,4 @@
     display: flex;
     justify-content: space-between;
   }
-
-  .pageIndex {
-    margin-top: 00px;
-    color: green;
-    font-size: 16px;
-    font-weight: bolder;
-    font-family: emoji;
-  }
 </style>
