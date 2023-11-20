@@ -32,10 +32,6 @@
 
   const FORMAT = "MMM D, yyyy";
 
-  function   capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   function isNumber(string){
     if(typeof string === "string"){
       return(!isNaN(string));
@@ -65,7 +61,7 @@
       getAllPatients() {
         const resourceType = JSON.stringify({
           "resourceType": "Observation",
-          "count": 100,
+          "count": 20,
           "offset": 0
         });
         console.log("getPatientsPagination is called with ", resourceType);
@@ -78,17 +74,16 @@
               let e = entry[i];
               console.log( e );
               if ( e.resource.id  ) {
-                //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
                 op.push(
                   { id: `${e.resource.id}`,
                     status: `${e.resource.status}`,
-                    categorySystem: `${e.resource.category ? e.resource.category[0].coding[0].system : ""}`,
-                    categoryCode: `${e.resource.category ? e.resource.category[0].coding[0].code : ""}`,
-                    categoryDisplay: `${e.resource.category ? e.resource.category[0].coding[0].display : ""}`,
-                    codeSystem: `${e.resource.code && e.resource.code.length > 0 ? e.resource.code.coding[0].system : ""}`,
-                    codeCode: `${e.resource.code && e.resource.code.length > 0 ? e.resource.code.coding[0].code : ""}`,
-                    codeDisplay: `${e.resource.code && e.resource.code.length > 0 ? e.resource.code.coding[0].display : ""}`,
-                    codeText: `${e.resource.code && e.resource.code.length > 0 ? e.resource.code.text : ""}`,
+                    categorySystem: `${e.resource.category && e.resource.category.length > 0 ? e.resource.category[0].coding[0].system : ""}`,
+                    categoryCode: `${e.resource.category && e.resource.category.length > 0 ? e.resource.category[0].coding[0].code : ""}`,
+                    categoryDisplay: `${e.resource.category && e.resource.category.length > 0 ? e.resource.category[0].coding[0].display : ""}`,
+
+                    codeSystem: `${e.resource.code && e.resource.code.coding && e.resource.code.coding.length > 0 ? e.resource.code.coding[0].system : ""}`,
+                    codeCode: `${e.resource.code && e.resource.code.coding && e.resource.code.coding.length > 0 ? e.resource.code.coding[0].code : ""}`,
+                    codeDisplay: `${e.resource.code && e.resource.code.coding && e.resource.code.coding.length > 0 ? e.resource.code.coding[0].display : ""}`
 
                   }
                 );

@@ -32,10 +32,6 @@
 
   const FORMAT = "MMM D, yyyy";
 
-  function   capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   function isNumber(string){
     if(typeof string === "string"){
       return(!isNaN(string));
@@ -65,7 +61,7 @@
       getAllPatients() {
         const resourceType = JSON.stringify({
           "resourceType": "ExplanationOfBenefit",
-          "count": 100,
+          "count": 50,
           "offset": 0
         });
         console.log("getPatientsPagination is called with ", resourceType);
@@ -81,10 +77,10 @@
                 //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
                 op.push(
                   { id: `${e.resource.id}`,
-                    resourceType: `${ capitalizeFirstLetter(e.resource.contained[0].resourceType) }`,
-                    type: `${ capitalizeFirstLetter(e.resource.contained[0].id) }`,
-                    status: `${ capitalizeFirstLetter(e.resource.contained[0].status) }`,
-                    intent: `${ capitalizeFirstLetter(e.resource.contained[0].intent) }`
+                    resourceType: `${ this.capitalizeFirstLetter(e.resource.contained[0].resourceType) }`,
+                    type: `${ this.capitalizeFirstLetter(e.resource.contained[0].id) }`,
+                    status: `${ this.capitalizeFirstLetter(e.resource.contained[0].status) }`,
+                    intent: `${ this.capitalizeFirstLetter(e.resource.contained[0].intent) }`
                   }
                 );
               }

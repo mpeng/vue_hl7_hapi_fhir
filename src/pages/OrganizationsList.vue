@@ -32,10 +32,6 @@
 
   const FORMAT = "MMM D, yyyy";
 
-  function   capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   function isNumber(string){
     if(typeof string === "string"){
       return(!isNaN(string));
@@ -81,8 +77,8 @@
                 //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
                 op.push(
                   {id: `${e.resource.id}`,
-                    name: `${ capitalizeFirstLetter(e.resource.name) }`,
-                    first_name: `${ e.resource.name[0].given ? capitalizeFirstLetter(e.resource.name[0].given[0]) : "N.A." }`,
+                    name: `${ this.capitalizeFirstLetter(e.resource.name) }`,
+                    first_name: `${ e.resource.name[0].given ? this.capitalizeFirstLetter(e.resource.name[0].given[0]) : "N.A." }`,
                     address: `${ e.resource.address ?
                       ( e.resource.address[0].line ? e.resource.address[0].line[0] + " " : "" ) + e.resource.address[0].city + " " + e.resource.address[0].state
                       + " " + e.resource.address[0].postalCode : "N.A." }`,

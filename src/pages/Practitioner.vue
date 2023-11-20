@@ -32,10 +32,6 @@
 
   const FORMAT = "MMM D, yyyy";
 
-  function   capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   function isNumber(string){
     if(typeof string === "string"){
       return(!isNaN(string));
@@ -64,7 +60,7 @@
     methods: {
       getAllPatients() {
         console.log("getPatientsPagination is called");
-        FhirService.getPatientsPagination(100, 0)
+        FhirService.getPatientsPagination(50, 0)
         //FhirService.getPatientsByBirthdayPageCount(200, 0)
           .then(response => {
             let entry = response.data.data.entry;
@@ -77,9 +73,9 @@
                 //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
                 op.push(
                   {id: `${e.resource.id}`,
-                    last_name: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
-                    first_name: `${ e.resource.name[0].given ? capitalizeFirstLetter(e.resource.name[0].given[0]) : "N.A." }`,
-                    gender: `${ e.resource.gender ? capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
+                    last_name: `${ this.capitalizeFirstLetter(e.resource.name[0].family) }`,
+                    first_name: `${ e.resource.name[0].given ? this.capitalizeFirstLetter(e.resource.name[0].given[0]) : "N.A." }`,
+                    gender: `${ e.resource.gender ? this.capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
                     birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`,
                     address: `${ e.resource.address ?
                       ( e.resource.address[0].line ? e.resource.address[0].line[0] + " " : "" ) + e.resource.address[0].city + " " + e.resource.address[0].state :

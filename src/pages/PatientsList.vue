@@ -67,10 +67,6 @@ import moment from "moment";
 
 const FORMAT = "MMM D, yyyy";
 
-function   capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
 function isNumber(string){
   if(typeof string === "string"){
     return(!isNaN(string));
@@ -189,9 +185,9 @@ export default {
               //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
               op.push(
                 {id: `${e.resource.id}`,
-                  familyName: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
-                  givenName: `${ e.resource.name[0].given ? capitalizeFirstLetter(e.resource.name[0].given[0]) : "" }`,
-                  gender: `${ e.resource.gender ? capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
+                  familyName: `${ this.capitalizeFirstLetter(e.resource.name[0].family) }`,
+                  givenName: `${ e.resource.name[0].given ? this.capitalizeFirstLetter(e.resource.name[0].given[0]) : "" }`,
+                  gender: `${ e.resource.gender ? this.capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
                   birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`
                 }
               );
@@ -223,9 +219,9 @@ export default {
               //console.log(e.name[0].family, e.name[0].given[0]);
               op.push(
                 {id: `${e.id}`,
-                  familyName: `${ capitalizeFirstLetter(e.name[0].family) }`,
-                  givenName: `${ capitalizeFirstLetter(e.name[0].given[0]) }`,
-                  gender: `${ e.gender ? capitalizeFirstLetter(e.gender) : "N.A." }`,
+                  familyName: `${ this.capitalizeFirstLetter(e.name[0].family) }`,
+                  givenName: `${ this.capitalizeFirstLetter(e.name[0].given[0]) }`,
+                  gender: `${ e.gender ? this.capitalizeFirstLetter(e.gender) : "N.A." }`,
                   birthday: `${ e.birthDate ? moment(e.birthDate).format(FORMAT) : "N.A." }`
                 }
               );
@@ -252,9 +248,9 @@ export default {
               //console.log(entry[i].resource.name[0].family, entry[i].resource.name[0].given[0]);
               op.push(
                 {id: `${e.resource.id}`,
-                  familyName: `${ capitalizeFirstLetter(e.resource.name[0].family) }`,
-                  givenName: `${ capitalizeFirstLetter(e.resource.name[0].given[0]) }`,
-                  gender: `${ e.resource.gender ? capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
+                  familyName: `${ this.capitalizeFirstLetter(e.resource.name[0].family) }`,
+                  givenName: `${ this.capitalizeFirstLetter(e.resource.name[0].given[0]) }`,
+                  gender: `${ e.resource.gender ? this.capitalizeFirstLetter(e.resource.gender) : "N.A." }`,
                   birthday: `${ e.resource.birthDate ? moment(e.resource.birthDate).format(FORMAT) : "N.A." }`
                 }
               );
