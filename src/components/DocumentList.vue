@@ -1,5 +1,9 @@
 <template>
+
+
+
   <div class="submit-form">
+
     <div class="col-md-8">
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Search by title"
@@ -49,6 +53,7 @@
 
     </div>
   </div>
+
 </template>
 
 <script>
@@ -61,10 +66,63 @@ export default {
       documents: [],
       currentDocument: null,
       currentIndex: -1,
-      title: ""
+      title: "",
+      whichTab: ref('tab1'),
+      tabLabel: ref('Health Information'),
+      tab: 'tab1',
+      tabs: [
+        {
+          label: 'Health Information',
+          key: 'tab1',
+          closable: false
+        },
+        {
+          label: 'Grants & Funding',
+          key: 'tab2',
+          closable: false
+        },
+        {
+          label: 'News & Events',
+          key: 'tab3',
+          closable: false
+        },
+        {
+          label: 'Research & Training',
+          key: 'tab4',
+          closable: false
+        },
+        {
+          label: 'Institutes',
+          key: 'tab5',
+          closable: false
+        },
+        {
+          label: 'About Us',
+          key: 'tab6',
+          closable: false
+        }
+      ]
     };
   },
+  watch: {
+    tab () {
+      console.log( "tab - Hello" );
+      let tab = this.getCurrTab()
+      console.log( "tab - Hello currentTab is ", tab, tab.key );
+      this.whichTab = tab.key;
+      this.tabLabel = tab.label;
+      console.log( "current tab is ", this.whichTab, this.tabLabel );
+    }
+  },
+
   methods: {
+    handleClick (e, tab, i) {
+      console.log(e, tab, i)
+    },
+
+    getCurrTab () {
+      return this.tabs.find(item => item.key === this.tab)
+    },
     retrieveDocuments() {
       DataService.getAll()
         .then(response => {

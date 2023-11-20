@@ -7,10 +7,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import './assets/css/app.scss';
 import mixins from "./components/mixins";
+import VueTabsChrome from 'vue-tabs-chrome';
 
 Vue.use(PaperDashboard);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
+Vue.use(VueTabsChrome);
 Vue.mixin(mixins);
 
 new Vue({

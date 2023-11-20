@@ -1,6 +1,27 @@
 <template>
   <div class="overflow-auto">
 
+    <div class="content">
+      <vue-tabs-chrome  ref="tab" :minHiddenWidth="120" v-model="tab" :tabs="tabs"  @contextnav="handleClick" />
+
+      <div class="tabStyle">
+        <div v-if="this.whichTab == 'tab1'">
+          <h6 class="space">{{this.tabLabel}}</h6>
+        </div>
+        <div v-else-if="this.whichTab == 'tab2'">
+          <h6 class="space">{{this.tabLabel}}</h6>
+          <PatientList />
+        </div>
+        <div v-else-if="this.whichTab == 'tab3'">
+          <h6 class="space">{{this.tabLabel}}</h6>
+        </div>
+        <div v-else-if="this.whichTab == 'tab4'">
+          <h6 class="space">{{this.tabLabel}}</h6>
+        </div>
+
+      </div>
+    </div>
+
     <b-table
       striped hover
       id="my-table"
@@ -48,6 +69,41 @@
         currentPage: 1,
         items: [
 
+        ],
+        whichTab: ref('tab1'),
+        tabLabel: ref('Health Information'),
+        tab: 'tab1',
+        tabs: [
+          {
+            label: 'Health Information',
+            key: 'tab1',
+            closable: false
+          },
+          {
+            label: 'Grants & Funding',
+            key: 'tab2',
+            closable: false
+          },
+          {
+            label: 'News & Events',
+            key: 'tab3',
+            closable: false
+          },
+          {
+            label: 'Research & Training',
+            key: 'tab4',
+            closable: false
+          },
+          {
+            label: 'Institutes',
+            key: 'tab5',
+            closable: false
+          },
+          {
+            label: 'About Us',
+            key: 'tab6',
+            closable: false
+          }
         ]
       }
     },
@@ -57,7 +113,26 @@
       }
     },
 
+    watch: {
+      tab () {
+        console.log( "tab - Hello" );
+        let tab = this.getCurrTab()
+        console.log( "tab - Hello currentTab is ", tab, tab.key );
+        this.whichTab = tab.key;
+        this.tabLabel = tab.label;
+        console.log( "current tab is ", this.whichTab, this.tabLabel );
+      }
+    },
+
     methods: {
+      handleClick (e, tab, i) {
+        console.log(e, tab, i)
+      },
+
+      getCurrTab () {
+        return this.tabs.find(item => item.key === this.tab)
+      },
+
       getAllPatients() {
         const resourceType = JSON.stringify({
           "resourceType": "Observation",

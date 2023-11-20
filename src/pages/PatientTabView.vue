@@ -54,8 +54,8 @@
       return {
         awesome: ref(true),
         whichTab: ref('tab1'),
-        tabLabel: ref('Home'),
-        tab: 'google',
+        tabLabel: ref('Health Information'),
+        tab: 'tab1',
         tabs: [
           {
             label: 'Health Information',
@@ -115,18 +115,6 @@
         this.whichTab = tab.key;
         this.tabLabel = tab.label;
         console.log( "current tab is ", this.whichTab, this.tabLabel );
-
-        let location = tab.url || ''
-
-        if (!location) {
-          return ''
-        }
-
-        if (!location.startsWith('http://') && !location.startsWith('https://')) {
-          location = 'https://' + location
-        }
-
-        this.location = location
       }
     },
 
