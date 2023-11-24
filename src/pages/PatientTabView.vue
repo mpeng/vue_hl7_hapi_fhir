@@ -144,7 +144,7 @@
     font-size: 15px;
     text-align: center;
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 0px;
   }
 
   .vue-tabs-chrome .tabs-footer {
