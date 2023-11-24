@@ -48,8 +48,8 @@
   "description": "Vue demo for people's health and wellbeing",
   "author": "Michael Peng <Michael.Peng@theoptionslab.com>",
   "engines": {
-    "node": ">= 8.1.4",
-    "npm": ">= 5.0.0"
+    "npm": "6.x",
+    "node": "14.15.x"
   },
   "browserslist": [
     "> 1%",
