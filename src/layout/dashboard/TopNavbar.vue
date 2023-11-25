@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">{{ routeName }}</a>
       <button
@@ -13,18 +13,16 @@
         <span class="navbar-toggler-bar"></span>
         <span class="navbar-toggler-bar"></span>
       </button>
-      <!--
+
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="ti-panel"></i>
-              <p>Stats</p>
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-clock" />
             </a>
           </li>
           <drop-down
             class="nav-item"
-            title="5 Notifications"
             title-classes="nav-link"
             icon="ti-bell"
           >
@@ -36,13 +34,24 @@
           </drop-down>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="ti-settings"></i>
-              <p>Settings</p>
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-envelope" />
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-user-doctor" />
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-user" />
             </a>
           </li>
         </ul>
       </div>
-      -->
+
     </div>
   </nav>
 </template>
@@ -78,4 +87,20 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+  .navbar .navbar-light {
+     background-color: #4CD964;
+   }
+
+  .fa_icon {
+    font-size: 16px;
+    margin-top: 4px;
+    color: #093629;
+  }
+
+  .navbar .nav-link i {
+    font-size: 16px;
+    color: #093629;
+  }
+
+</style>
