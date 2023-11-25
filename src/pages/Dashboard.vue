@@ -29,61 +29,62 @@
     </div>
 
     <!--Charts-->
-    <!--
-    <div class="row">
-      <div class="col-12">
-        <chart-card
-          title="Users behavior"
-          sub-title="24 Hours performance"
-          :chart-data="usersChart.data"
-          :chart-options="usersChart.options"
-        >
-          <span slot="footer">
-            <i class="ti-reload"></i> Updated 3 minutes ago
-          </span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Open
-            <i class="fa fa-circle text-danger"></i> Click
-            <i class="fa fa-circle text-warning"></i> Click Second Time
-          </div>
-        </chart-card>
-      </div>
 
+    <div class="row">
       <div class="col-md-6 col-12">
         <chart-card
-          title="Email Statistics"
-          sub-title="Last campaign performance"
+          title="U.S. Patient Visits Trend"
+          sub-title=""
           :chart-data="preferencesChart.data"
           chart-type="Pie"
         >
           <span slot="footer">
-            <i class="ti-timer"></i> Campaign set 2 days ago</span
+            <i class="ti-timer"></i> Doctor visits</span
           >
           <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Open
-            <i class="fa fa-circle text-danger"></i> Bounce
-            <i class="fa fa-circle text-warning"></i> Unsubscribe
+            <i class="fa fa-circle text-info"></i> New Patients
+            <i class="fa fa-circle text-danger"></i> Existing Patients
+            <i class="fa fa-circle text-warning"></i> Emergency Visits
           </div>
         </chart-card>
       </div>
 
       <div class="col-md-6 col-12">
         <chart-card
-          title="2015 Sales"
-          sub-title="All products including Taxes"
+          title="2023 U.S. Patients"
+          sub-title=""
           :chart-data="activityChart.data"
           :chart-options="activityChart.options"
         >
           <span slot="footer">
-            <i class="ti-check"></i> Data information certified
+            <i class="ti-check"></i> Collected from multiple sources,
           </span>
           <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Tesla Model S
-            <i class="fa fa-circle text-warning"></i> BMW 5 Series
+            <i class="fa fa-circle text-info"></i> New Patients
+            <i class="fa fa-circle text-warning"></i> Existing Patients
+            <i class="fa fa-circle text-warning"></i> Emergency Visits
           </div>
         </chart-card>
       </div>
-      -->
+
+      <div class="col-12">
+      <chart-card
+        title="Patients behavior"
+        sub-title="12 Months performance"
+        :chart-data="usersChart.data"
+        :chart-options="usersChart.options"
+      >
+          <span slot="footer">
+            <i class="ti-reload"></i> Updated 3 minutes ago
+          </span>
+        <div slot="legend">
+          <i class="fa fa-circle text-info"></i> New Patients
+          <i class="fa fa-circle text-danger"></i> Existing Patients
+          <i class="fa fa-circle text-warning"></i> Emergency Visits
+        </div>
+      </chart-card>
+    </div>
+
     </div>
   </div>
 </template>
@@ -186,6 +187,7 @@ export default {
           series: [
             [542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
             [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795],
+            [330, 293, 180, 580, 303, 853, 600, 364, 698, 910, 236, 595],
           ],
         },
         options: {
