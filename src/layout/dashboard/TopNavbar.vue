@@ -18,7 +18,31 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <font-awesome-icon class="fa_icon" icon="fa-solid fa-clock" />
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-virus-covid" />
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-notes-medical" />
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-people-arrows" />
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-prescription" />
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-kit-medical" />
             </a>
           </li>
           <drop-down
@@ -40,7 +64,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <font-awesome-icon class="fa_icon" icon="fa-solid fa-user-doctor" />
+              <font-awesome-icon class="fa_icon" icon="fa-solid fa-calendar-days" />
             </a>
           </li>
 
