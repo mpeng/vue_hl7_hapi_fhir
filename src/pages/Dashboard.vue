@@ -33,7 +33,7 @@
     <div class="row">
       <div class="col-md-6 col-12">
         <chart-card
-          title="U.S. Patient Visits Trend"
+          title="U.S. Patient Visits"
           sub-title=""
           :chart-data="preferencesChart.data"
           chart-type="Pie"
