@@ -35,12 +35,22 @@
         title: {
           text: 'Leading causes of death in U.S. 2021',
           left: 'center',
+          textStyle: {
+            color: '#c97526',
+            fontSize: 16,
+            fontWeight: 'normal',
+          },
         },
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)',
+          textStyle: {
+            color: '#9cc106',
+            fontSize: 11
+          },
         },
         legend: {
+          padding: 40,
           orient: 'vertical',
           left: 'left',
           data: ['Heart disease', 'Cancer', 'COVID-19', 'Accidents', 'Stroke',
@@ -52,7 +62,7 @@
             name: 'Leading causes of death in U.S.',
             type: 'pie',
             radius: '55%',
-            center: ['50%', '60%'],
+            center: ['50%', '50%'],
             data: [
               { value: 695547, name: 'Heart disease' },
               { value: 605213, name: 'Cancer' },
