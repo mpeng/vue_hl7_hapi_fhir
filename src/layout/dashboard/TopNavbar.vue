@@ -1,7 +1,10 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">{{ routeName }}</a>
+      <div class="navbar-brand2" href="#">
+          <img width="45px" src="@/assets/img/fhir.svg" alt="" />
+          <i> Health Level7</i>
+      </div>
       <button
         class="navbar-toggler navbar-burger"
         type="button"
@@ -112,9 +115,7 @@ export default {
 };
 </script>
 <style>
-  .navbar .navbar-light {
-     background-color: #4CD964;
-   }
+
 
   .fa_icon {
     font-size: 16px;
@@ -125,6 +126,16 @@ export default {
   .navbar .nav-link i {
     font-size: 16px;
     color: #093629;
+  }
+
+  .navbar-brand2 {
+    font-weight: bold;
+    margin-top: 4px;
+    font-size: 18px;
+    font-family: emoji;
+    color: #c11d0c;
+    text-transform: uppercase;
+    display:inline-block;
   }
 
 </style>
