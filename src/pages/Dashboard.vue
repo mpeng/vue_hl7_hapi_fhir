@@ -1,34 +1,12 @@
 <template>
   <div>
-    <!--Stats cards-->
-    <div class="row">
-      <!--
-      <div
-        class="col-md-6 col-xl-3"
-        v-for="stats in statsCards"
-        :key="stats.title"
-      >
-        <stats-card>
-          <div
-            class="icon-big text-center"
-            :class="`icon-${stats.type}`"
-            slot="header"
-          >
-            <i :class="stats.icon"></i>
-          </div>
-          <div class="numbers" slot="content">
-            <p>{{ stats.title }}</p>
-            {{ stats.value }}
-          </div>
-          <div class="stats" slot="footer">
-            <i :class="stats.footerIcon"></i> {{ stats.footerText }}
-          </div>
-        </stats-card>
-      </div>
-      -->
-    </div>
 
-    <!--Charts-->
+    <div class="row">
+      <div class="col-12">
+        <ECharts />
+      </div>
+
+    </div>
 
     <div class="row">
       <div class="col-md-6 col-12">
@@ -67,34 +45,18 @@
         </chart-card>
       </div>
 
-      <div class="col-12">
-      <chart-card
-        title="Patients behavior"
-        sub-title="12 Months performance"
-        :chart-data="usersChart.data"
-        :chart-options="usersChart.options"
-      >
-          <span slot="footer">
-            <i class="ti-reload"></i> Updated 3 minutes ago
-          </span>
-        <div slot="legend">
-          <i class="fa fa-circle text-info"></i> New Patients
-          <i class="fa fa-circle text-danger"></i> Existing Patients
-          <i class="fa fa-circle text-warning"></i> Emergency Visits
-        </div>
-      </chart-card>
-    </div>
-
     </div>
   </div>
 </template>
 <script>
 import { StatsCard, ChartCard } from "@/components/index";
+import ECharts from './ECharts.vue';
 import Chartist from "chartist";
 export default {
   components: {
     StatsCard,
     ChartCard,
+    ECharts
   },
   /**
    * Chart data used to render stats, charts. Should be replaced with server data
