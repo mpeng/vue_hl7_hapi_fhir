@@ -62,7 +62,7 @@
             name: 'Leading causes of death in U.S.',
             type: 'pie',
             radius: '55%',
-            center: ['50%', '50%'],
+            center: ['50%', '60%'],
             data: [
               { value: 695547, name: 'Heart disease' },
               { value: 605213, name: 'Cancer' },
