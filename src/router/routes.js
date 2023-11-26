@@ -18,6 +18,7 @@ import Patient from "@/pages/Patient.vue";
 import CodeSystem from "@/pages/CodeSystem.vue";
 import Observation from "@/pages/Observation.vue";
 import Procedure from "@/pages/Procedure.vue";
+import ECharts from "@/pages/ECharts.vue";
 import ExplanationOfBenefit from "@/pages/ExplanationOfBenefit.vue";
 import BootstrapTable from "@/pages/BootstrapTable.vue";
 
@@ -128,7 +129,14 @@ const routes = [
         path: "/add",
         name: "Add a document",
         component: () => import("../components/AddDocument")
+      },
+      {
+        path: "/chart",
+        name: "Charts",
+        component: ECharts
       }
+
+
 
     ],
   },

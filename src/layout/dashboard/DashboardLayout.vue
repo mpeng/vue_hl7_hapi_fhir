@@ -57,6 +57,11 @@
           name="Add a document"
           icon="ti-jsfiddle"
         />
+        <sidebar-link
+          to="/chart"
+          name="Charts"
+          icon="ti-pie-chart"
+        />
 
       </template>
     </side-bar>
