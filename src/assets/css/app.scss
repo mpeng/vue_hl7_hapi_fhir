@@ -28,6 +28,18 @@ label {
   font-family: emoji;
 }
 
+.card .card-title {
+  font-size: 18px;
+}
+
+.card .footer div {
+  font-size: 12px;
+}
+
+.card .card-category, .card label {
+  font-size: 12px;
+}
+
 // Then import Bootstrap and BootstrapVue SCSS files (order is important)
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
 @import '../../../node_modules/bootstrap-vue/src/index.scss';
