@@ -43,7 +43,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue HL7 - hapi fhir",
+      default: "HL7 - HAPI FHIR",
     },
     backgroundColor: {
       type: String,

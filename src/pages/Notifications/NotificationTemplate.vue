@@ -1,6 +1,6 @@
 <template>
   <span
-    >Welcome to <b>Vue HL7 - hapi fhir</b></span
+    >Welcome to <b>HL7 - HAPI FHIR</b></span
   >
 </template>
 
