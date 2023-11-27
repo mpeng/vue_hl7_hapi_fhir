@@ -5,58 +5,25 @@
       <div class="col-12">
         <ECharts />
       </div>
-
-    </div>
-
-    <div class="row">
-      <div class="col-md-6 col-12">
-        <chart-card
-          title="U.S. Patient Visits"
-          sub-title=""
-          :chart-data="preferencesChart.data"
-          chart-type="Pie"
-        >
-          <span slot="footer">
-            <i class="ti-timer"></i> Doctor visits</span
-          >
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> New Patients
-            <i class="fa fa-circle text-danger"></i> Existing Patients
-            <i class="fa fa-circle text-warning"></i> Emergency Visits
-          </div>
-        </chart-card>
-      </div>
-
-      <div class="col-md-6 col-12">
-        <chart-card
-          title="2023 U.S. Patients"
-          sub-title=""
-          :chart-data="activityChart.data"
-          :chart-options="activityChart.options"
-        >
-          <span slot="footer">
-            <i class="ti-check"></i> Collected from multiple sources,
-          </span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> New Patients
-            <i class="fa fa-circle text-warning"></i> Existing Patients
-            <i class="fa fa-circle text-warning"></i> Emergency Visits
-          </div>
-        </chart-card>
+      <div class="col-12">
+        <LifeExpectancy />
       </div>
 
     </div>
+
   </div>
 </template>
 <script>
 import { StatsCard, ChartCard } from "@/components/index";
 import ECharts from './ECharts.vue';
+import LifeExpectancy from './LifeExpectancy.vue';
 import Chartist from "chartist";
 export default {
   components: {
     StatsCard,
     ChartCard,
-    ECharts
+    ECharts,
+    LifeExpectancy
   },
   /**
    * Chart data used to render stats, charts. Should be replaced with server data

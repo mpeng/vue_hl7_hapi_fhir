@@ -62,6 +62,11 @@
           name="Charts"
           icon="ti-pie-chart"
         />
+        <sidebar-link
+          to="/lifeExpectancy"
+          name="LifeExpectancy"
+          icon="ti-pie-chart"
+        />
 
       </template>
     </side-bar>

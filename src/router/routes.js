@@ -19,6 +19,7 @@ import CodeSystem from "@/pages/CodeSystem.vue";
 import Observation from "@/pages/Observation.vue";
 import Procedure from "@/pages/Procedure.vue";
 import ECharts from "@/pages/ECharts.vue";
+import LifeExpectancy from "@/pages/LifeExpectancy.vue";
 import ExplanationOfBenefit from "@/pages/ExplanationOfBenefit.vue";
 import BootstrapTable from "@/pages/BootstrapTable.vue";
 
@@ -134,6 +135,11 @@ const routes = [
         path: "/chart",
         name: "Charts",
         component: ECharts
+      },
+      {
+        path: "/LifeExpectancy",
+        name: "LifeExpectancy",
+        component: LifeExpectancy
       }
 
 
