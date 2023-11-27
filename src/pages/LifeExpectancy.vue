@@ -34,7 +34,7 @@
   .chart-container {
     position: relative;
     height: 60vh;
-    width: 80%;
+    width: 90%;
     overflow: hidden;
   }
 </style>

@@ -93,7 +93,7 @@
 
 <style scoped>
   .chart {
-    height: 75vh;
-    width: 80%;
+    height: 90vh;
+    width: 90%;
   }
 </style>
