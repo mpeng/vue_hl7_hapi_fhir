@@ -36,6 +36,7 @@
     "vue-notifyjs": "0.3.0",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "3.0.1",
+    "vue-sidebar-menu": "^4.8.1",
     "vue-tabs-chrome": "^0.10.0"
   },
   "devDependencies": {

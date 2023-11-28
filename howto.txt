@@ -2,3 +2,4 @@
 2. http://localhost:8081/#/documents
 3. http://localhost:8081/#/add
 4. icon: https://demo.unitemplates.com/reto/icons
+5. fontawesome: https://fontawesome.com/search?q=medical&o=r&m=free

@@ -22,6 +22,8 @@ import ECharts from "@/pages/ECharts.vue";
 import LifeExpectancy from "@/pages/LifeExpectancy.vue";
 import ExplanationOfBenefit from "@/pages/ExplanationOfBenefit.vue";
 import BootstrapTable from "@/pages/BootstrapTable.vue";
+import SideBarMenu from "@/pages/SideBarMenu.vue";
+
 
 const routes = [
   {
@@ -140,8 +142,12 @@ const routes = [
         path: "/LifeExpectancy",
         name: "LifeExpectancy",
         component: LifeExpectancy
+      },
+      {
+        path: "/SideBarMenu",
+        name: "SideBarMenu",
+        component: SideBarMenu
       }
-
 
 
     ],

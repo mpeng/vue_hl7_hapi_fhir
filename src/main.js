@@ -10,6 +10,8 @@ import mixins from "./components/mixins";
 import VueTabsChrome from 'vue-tabs-chrome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import VueSidebarMenu from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import { faUserSecret, faUser, faEnvelope, faClock,
   faUserDoctor, faCalendarDays, faNotesMedical,
   faPeopleArrows, faPrescription, faKitMedical, faVirusCovid } from '@fortawesome/free-solid-svg-icons';
@@ -32,6 +34,7 @@ Vue.use(PaperDashboard);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueTabsChrome);
+Vue.use(VueSidebarMenu);
 Vue.mixin(mixins);
 
 new Vue({
