@@ -6,7 +6,7 @@
 
         <sidebar-link
           to="/patient-Tab-View"
-          name="Patient"
+          name="Patients"
           icon="ti-layout-tab-window"
         />
 
@@ -18,34 +18,35 @@
 
         <sidebar-link
           to="/codeSystem"
-          name="CodeSystem"
+          name="Code Systems"
           icon="ti-write"
         />
 
         <sidebar-link
           to="/observation"
-          name="Observation"
+          name="Observations"
           icon="ti-microphone-alt"
         />
 
         <sidebar-link
           to="/procedure"
-          name="Procedure"
+          name="Procedures"
           icon="ti-layers-alt"
         />
 
         <sidebar-link
           to="/explanationOfBenefit"
-          name="ExplanationOfBenefit"
+          name="Explanation of Benefits"
           icon="ti-anchor"
         />
 
         <sidebar-link
           to="/practitioner"
-          name="Practitioner"
+          name="Practitioners"
           icon="ti-user"
         />
 
+        <!--
         <sidebar-link
           to="/documents"
           name="Browse documents"
@@ -67,6 +68,7 @@
           name="LifeExpectancy"
           icon="ti-bar-chart"
         />
+        -->
 
       </template>
     </side-bar>
